@@ -1,0 +1,125 @@
+ Air Berlin
+ American Eagle
+ Adria Airways
+ Aegean Airlines
+ Aeroflot
+ Aerolíneas Argentinas
+ Aeromexico
+ Aeroméxico Connect
+ Air Canada
+ Air Canada Express
+ Air Canada Rouge
+ Air China
+ Air Dolomiti
+ Air Europa
+ Air France
+ Air India
+ Air India Regional
+ Air New Zealand
+ Air New Zealand Link
+ Air Nostrum
+ Air Sinai
+ Airlink
+ Alitalia
+ All Nippon Airways
+ American Airlines
+ Anadolu Jet
+ Asiana Airlines
+ Austral Líneas Aéreas
+ Austrian Airlines
+ Avianca
+ Avianca Brazil
+ Avianca Costa Rica
+ Avianca Ecuador
+ Avianca El Salvador
+ Avianca Guatemala
+ Avianca Honduras
+ Avianca Nicaragua
+ Avianca Peru
+ BA CityFlyer
+ Blue1
+ British Airways
+ British Airways Limited
+ Brussels Airlines
+ Cathay Pacific
+ China Airlines
+ China Eastern Airlines
+ China Southern Airlines
+ Comair
+ Copa Airlines
+ Copa Airlines Colombia
+ Croatia Airlines
+ Czech Airlines
+ Dalian Airlines
+ Delta Air Lines
+ Delta Connection
+ Delta Shuttle
+ Dragonair
+ Edelweiss Air
+ EgyptAir
+ EgyptAir Express
+ Ethiopian Airlines
+ EVA Air
+ Finnair
+ Garuda Indonesia
+ Globus Airlines
+ Iberia
+ Iberia Express
+ Iberia Regional
+ J-Air
+ Japan Airlines
+ Japan Transocean Air
+ Jetconnect
+ Kenya Airways
+ KLM
+ KLM Cityhopper
+ Korean Air
+ LAN Airlines
+ LAN Argentina
+ LAN Colombia
+ LAN Ecuador
+ LAN Express
+ LAN Peru
+ LOT Polish Airlines
+ Lufthansa
+ Lufthansa CityLine
+ Lufthansa Regional
+ Malaysia Airlines
+ Mandarin Airlines
+ Mango
+ Middle East Airlines
+ Niki
+ Olympic Air
+ OpenSkies
+ PGA Express
+ Portugalia
+ Qantas
+ QantasLink
+ Qatar Airways
+ Royal Jordanian
+ S7 Airlines
+ Saudia
+ Scandinavian Airlines
+ Shanghai Airlines
+ Shenzhen Airlines
+ Singapore Airlines
+ South African Airways
+ South African Express
+ SriLankan Airlines
+ Sun-Air
+ Swiss Global Air Lines
+ SWISS International Air Lines
+ TAM Airlines
+ TAP Portugal
+ TAROM
+ Thai Airways International
+ Turkey Sun Express
+ Turkish Airlines
+ Uni Air
+ United Airlines
+ United Express
+ US Airways
+ US Airways Express
+ US Airways Shuttle
+ Vietnam Airlines
+ Xiamen Airlines
