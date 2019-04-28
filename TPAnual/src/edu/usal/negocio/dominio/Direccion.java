@@ -1,6 +1,8 @@
 package edu.usal.negocio.dominio;
 
-public class Direccion {
+import java.io.Serializable;
+
+public class Direccion implements Serializable{
 	
 	private String calle;
 	private String altura;

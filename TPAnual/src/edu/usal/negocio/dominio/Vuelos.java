@@ -1,8 +1,10 @@
 package edu.usal.negocio.dominio;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Vuelos {
+
+public class Vuelos implements Serializable{
 	
 	private String numeroVuelo;
 	private Integer cantidadAsientos;

@@ -1,8 +1,9 @@
 package edu.usal.negocio.dominio;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Aerolinea {
+public class Aerolinea implements Serializable{
 	
 	private String nombre;
 	private String codigo;

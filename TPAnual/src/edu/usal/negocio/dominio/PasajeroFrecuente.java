@@ -1,6 +1,8 @@
 package edu.usal.negocio.dominio;
 
-public class PasajeroFrecuente {
+import java.io.Serializable;
+
+public class PasajeroFrecuente implements Serializable{
 	
 	private Alianza alianza;
 	private Aerolinea aerolinea;

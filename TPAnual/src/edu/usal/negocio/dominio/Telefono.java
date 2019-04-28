@@ -1,6 +1,8 @@
 package edu.usal.negocio.dominio;
 
-public class Telefono {
+import java.io.Serializable;
+
+public class Telefono implements Serializable{
 
 	private String numeroPersonal;
 	private String numeroCelular;

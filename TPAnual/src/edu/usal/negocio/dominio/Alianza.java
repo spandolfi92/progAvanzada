@@ -1,6 +1,8 @@
 package edu.usal.negocio.dominio;
 
-public class Alianza {
+import java.io.Serializable;
+
+public class Alianza implements Serializable{
 
 	private String nombre;
 

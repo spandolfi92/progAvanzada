@@ -1,6 +1,8 @@
 package edu.usal.negocio.dominio;
 
-public class Pais {
+import java.io.Serializable;
+
+public class Pais implements Serializable{
 	
 	private String nombre;
 

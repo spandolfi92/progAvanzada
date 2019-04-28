@@ -1,8 +1,10 @@
 package edu.usal.negocio.dominio;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Ventas {
+
+public class Ventas implements Serializable{
 	
 	private Cliente cliente;
 	private Vuelos vuelo;

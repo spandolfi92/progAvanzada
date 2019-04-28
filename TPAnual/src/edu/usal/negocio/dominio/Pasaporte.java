@@ -1,8 +1,10 @@
 package edu.usal.negocio.dominio;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Pasaporte {
+
+public class Pasaporte implements Serializable{
 
 	private String numero;
 	private Pais pais;
