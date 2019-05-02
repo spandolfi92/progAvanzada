@@ -28,6 +28,21 @@ public class PropertiesUtil
 		return prop.getProperty("pathCliente");
 	}
 	
+	public static String getPropertyVuelo()
+	{
+		return prop.getProperty("pathVuelo");
+	}
+	
+	public static String getPropertyVenta()
+	{
+		return prop.getProperty("pathVenta");
+	}
+	
+	public static String getPropertyAerolinea()
+	{
+		return prop.getProperty("pathAerolineas");
+	}
+	
 	
 
 }
