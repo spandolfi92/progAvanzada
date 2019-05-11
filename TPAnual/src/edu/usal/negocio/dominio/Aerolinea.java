@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Aerolinea implements Serializable{
-	
+	 
 	private double id;
 	private String nombre;
 	private String codigo;
