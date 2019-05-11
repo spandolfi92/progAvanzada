@@ -5,7 +5,14 @@ import java.util.Date;
 
 
 public class Ventas implements Serializable{
-	
+	private double id;
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
+
 	private Cliente cliente;
 	private Vuelos vuelo;
 	private Aerolinea aerolinea;
@@ -43,15 +50,16 @@ public class Ventas implements Serializable{
 		this.formaPago = formaPago;
 	}
 	
-	public Ventas(Cliente cliente, Vuelos vuelo, Aerolinea aerolinea, Date fechaVenta, String formaPago) {
+	
+	public Ventas(double id, Cliente cliente, Vuelos vuelo, Aerolinea aerolinea, Date fechaVenta, String formaPago) {
 		super();
+		this.id = id;
 		this.cliente = cliente;
 		this.vuelo = vuelo;
 		this.aerolinea = aerolinea;
 		this.fechaVenta = fechaVenta;
 		this.formaPago = formaPago;
 	}
-	
 	public Ventas() {
 	}
 	

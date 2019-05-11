@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class Cliente implements Serializable{
 	
-	private String nombreApellido;
+	private String nombreApellido; //separar nombre y apellido
 	private String dni;
 	private Pasaporte pasaporte;
 	private String cuitCuil;

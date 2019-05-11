@@ -3,9 +3,16 @@ package edu.usal.negocio.dominio;
 import java.io.Serializable;
 
 public class PasajeroFrecuente implements Serializable{
-	
-	private Alianza alianza;
+	private double id;
+	private Alianza alianza; //usar como ENUM o String porque son 3
 	private Aerolinea aerolinea;
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
+
 	private String numero;
 	private String categoria;
 	
@@ -34,14 +41,16 @@ public class PasajeroFrecuente implements Serializable{
 		this.categoria = categoria;
 	}
 	
-	public PasajeroFrecuente(Alianza alianza, Aerolinea aerolinea, String numero, String categoria) {
+	
+	
+	public PasajeroFrecuente(double id, Alianza alianza, Aerolinea aerolinea, String numero, String categoria) {
 		super();
+		this.id = id;
 		this.alianza = alianza;
 		this.aerolinea = aerolinea;
 		this.numero = numero;
 		this.categoria = categoria;
 	}
-	
 	public PasajeroFrecuente() {
 	
 	}

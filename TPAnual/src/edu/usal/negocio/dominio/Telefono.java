@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 public class Telefono implements Serializable{
 
+	private double id;
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	private String numeroPersonal;
 	private String numeroCelular;
 	private String numeroLaboral;
@@ -27,8 +34,11 @@ public class Telefono implements Serializable{
 		this.numeroLaboral = numeroLaboral;
 	}
 	
-	public Telefono(String numeroPersonal, String numeroCelular, String numeroLaboral) {
+	
+	
+	public Telefono(double id, String numeroPersonal, String numeroCelular, String numeroLaboral) {
 		super();
+		this.id = id;
 		this.numeroPersonal = numeroPersonal;
 		this.numeroCelular = numeroCelular;
 		this.numeroLaboral = numeroLaboral;

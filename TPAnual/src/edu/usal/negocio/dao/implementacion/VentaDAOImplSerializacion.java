@@ -63,8 +63,7 @@ public class VentaDAOImplSerializacion implements VentaDAO{
 	public void modificarVenta(Ventas ventaModificada) throws Exception {
 		listarVentas();
 		for(int i = 0; i < ventas.size(); i ++){
-			if(ventas.get(i).getVuelo().getNumeroVuelo().equals(ventaModificada.getVuelo().getNumeroVuelo()) &&
-					ventas.get(i).getCliente().getDni().equals(ventaModificada.getCliente().getDni()))
+			if(ventas.get(i).getId() == ventaModificada.getId())
 			{
 				ventas.set(i, ventaModificada);
 			}
@@ -86,8 +85,7 @@ public class VentaDAOImplSerializacion implements VentaDAO{
 	public void eliminarVenta(Ventas ventaElegida) throws Exception {
 		listarVentas();
 		for(int i = 0; i < ventas.size(); i ++){
-			if(ventas.get(i).getVuelo().getNumeroVuelo().equals(ventaElegida.getVuelo().getNumeroVuelo())
-					&& (ventas.get(i).getCliente().getDni().equals(ventaElegida.getCliente().getDni()))){
+			if(ventas.get(i).getId() == ventaElegida.getId()){
 				ventas.remove(ventas.get(i));
 			}
 		}
