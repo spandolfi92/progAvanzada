@@ -8,6 +8,6 @@ public interface ClienteDAO {
 	public List <Cliente> listarClientes() throws Exception;
 	public void altaCliente (Cliente cliente) throws Exception;
 	public void modificarCliente (Cliente cliente) throws Exception;
-	public void eliminarCliente (String dni) throws Exception;
+	public void eliminarCliente (double id) throws Exception;
 
 }

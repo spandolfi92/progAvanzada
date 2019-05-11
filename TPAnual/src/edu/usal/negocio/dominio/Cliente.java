@@ -5,6 +5,7 @@ import java.sql.Date;
 
 public class Cliente implements Serializable{
 	
+	private double id;
 	private String nombreApellido;
 	private String dni;
 	private Pasaporte pasaporte;
@@ -16,6 +17,12 @@ public class Cliente implements Serializable{
 	private Direccion direccion;
 	
 	
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	public String getNombreApellido() {
 		return nombreApellido;
 	}
@@ -71,9 +78,12 @@ public class Cliente implements Serializable{
 		this.direccion = direccion;
 	}
 	
-	public Cliente(String nombreApellido, String dni, Pasaporte pasaporte, String cuitCuil, Date fechaNacimiento,
-			String email, Telefono telefono, PasajeroFrecuente pasajeroFrecuente, Direccion direccion) {
+	
+	public Cliente(double id, String nombreApellido, String dni, Pasaporte pasaporte, String cuitCuil,
+			Date fechaNacimiento, String email, Telefono telefono, PasajeroFrecuente pasajeroFrecuente,
+			Direccion direccion) {
 		super();
+		this.id = id;
 		this.nombreApellido = nombreApellido;
 		this.dni = dni;
 		this.pasaporte = pasaporte;

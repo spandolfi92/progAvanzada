@@ -64,7 +64,7 @@ public class AerolineaDAOImplSerializacion implements AerolineaDAO{
 	public void modificarAerolinea(Aerolinea aerolinea) throws Exception {
 		listarAerolineas();
 		for(int i = 0; i < aerolineas.size(); i ++){
-			if(aerolineas.get(i).getNombre().equals(aerolinea.getNombre()))
+			if(aerolineas.get(i).getId() == aerolinea.getId())
 			{
 				aerolineas.set(i, aerolinea);
 			}
@@ -84,10 +84,10 @@ public class AerolineaDAOImplSerializacion implements AerolineaDAO{
 	}
 
 	@Override
-	public void eliminarAerolinea(String codigo) throws Exception {
+	public void eliminarAerolinea(double id) throws Exception {
 		listarAerolineas();
 		for(int i = 0; i < aerolineas.size(); i ++){
-			if(aerolineas.get(i).getCodigo().equals(codigo)){
+			if(aerolineas.get(i).getId() == id){
 				aerolineas.remove(aerolineas.get(i));
 			}
 		}

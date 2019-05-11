@@ -5,11 +5,18 @@ import java.util.List;
 
 public class Aerolinea implements Serializable{
 	
+	private double id;
 	private String nombre;
 	private String codigo;
 	private Alianza alianza;
 	private List<Vuelos> vuelos;
 	
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -35,13 +42,16 @@ public class Aerolinea implements Serializable{
 		this.vuelos = vuelos;
 	}
 	
-	public Aerolinea(String nombre, String codigo, Alianza alianza, List<Vuelos> vuelos) {
+	public Aerolinea(double id, String nombre, String codigo, Alianza alianza, List<Vuelos> vuelos) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.alianza = alianza;
 		this.vuelos = vuelos;
 	}
+	
+
 	
 	
 

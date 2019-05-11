@@ -63,7 +63,7 @@ public class ClienteDAOImplSerializacion implements ClienteDAO{
 	public void modificarCliente(Cliente cliente) throws Exception {
 		listarClientes();
 		for(int i = 0; i < clientes.size(); i ++){
-			if(clientes.get(i).getDni().equals(cliente.getDni()))
+			if(clientes.get(i).getId() == cliente.getId())
 			{
 				clientes.set(i, cliente);
 			}
@@ -82,10 +82,10 @@ public class ClienteDAOImplSerializacion implements ClienteDAO{
 	}
 
 	@Override
-	public void eliminarCliente(String dni) throws Exception {
+	public void eliminarCliente(double id) throws Exception {
 		listarClientes();
 		for(int i = 0; i < clientes.size(); i ++){
-			if(clientes.get(i).getDni().equals(dni)){
+			if(clientes.get(i).getId() == id){
 				clientes.remove(clientes.get(i));
 			}
 		}

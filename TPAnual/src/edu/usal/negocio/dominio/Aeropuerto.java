@@ -4,11 +4,19 @@ import java.io.Serializable;
 
 public class Aeropuerto implements Serializable{
 	
+	private double id;
 	private String identificacion;
 	private String ciudad;
 	private Provincia provincia;
 	private Pais pais;
 	
+	
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	public String getIdentificacion() {
 		return identificacion;
 	}
@@ -34,14 +42,16 @@ public class Aeropuerto implements Serializable{
 		this.pais = pais;
 	}
 	
-	public Aeropuerto(String identificacion, String ciudad, Provincia provincia, Pais pais) {
+	
+	
+	public Aeropuerto(double id, String identificacion, String ciudad, Provincia provincia, Pais pais) {
 		super();
+		this.id = id;
 		this.identificacion = identificacion;
 		this.ciudad = ciudad;
 		this.provincia = provincia;
 		this.pais = pais;
 	}
-	
 	public Aeropuerto() {
 	}
 	

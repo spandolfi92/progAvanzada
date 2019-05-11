@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Direccion implements Serializable{
 	
+	private double id;
 	private String calle;
 	private String altura;
 	private String ciudad;
@@ -12,6 +13,12 @@ public class Direccion implements Serializable{
 	private String codigoPostal;
 	
 	
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	public String getCalle() {
 		return calle;
 	}
@@ -48,8 +55,11 @@ public class Direccion implements Serializable{
 	public void setCodigoPostal(String codigoPostal) {
 		this.codigoPostal = codigoPostal;
 	}
-	public Direccion(String calle, String altura, String ciudad, Provincia provincia, Pais pais, String codigoPostal) {
+	
+	public Direccion(double id, String calle, String altura, String ciudad, Provincia provincia, Pais pais,
+			String codigoPostal) {
 		super();
+		this.id = id;
 		this.calle = calle;
 		this.altura = altura;
 		this.ciudad = ciudad;

@@ -9,6 +9,6 @@ public interface AerolineaDAO {
 	public List <Aerolinea> listarAerolineas() throws Exception;
 	public void altaAerolinea (Aerolinea aerolinea) throws Exception;
 	public void modificarAerolinea (Aerolinea aerolinea) throws Exception;
-	public void eliminarAerolinea (String codigo) throws Exception;
+	public void eliminarAerolinea (double id) throws Exception;
 
 }
