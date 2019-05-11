@@ -5,7 +5,14 @@ import java.util.Date;
 
 
 public class Vuelos implements Serializable{
-	
+	private double id;
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
+
 	private String numeroVuelo;
 	private Integer cantidadAsientos;
 	private Aeropuerto aeropuertoSalida;
@@ -47,6 +54,18 @@ public class Vuelos implements Serializable{
 	public Date getFechaLlegada() {
 		return fechaLlegada;
 	}
+	public Vuelos(double id, String numeroVuelo, Integer cantidadAsientos, Aeropuerto aeropuertoSalida,
+			Aeropuerto aeropuertoLlegada, Date fechaSalida, Date fechaLlegada, String tiempoVuelo) {
+		super();
+		this.id = id;
+		this.numeroVuelo = numeroVuelo;
+		this.cantidadAsientos = cantidadAsientos;
+		this.aeropuertoSalida = aeropuertoSalida;
+		this.aeropuertoLlegada = aeropuertoLlegada;
+		this.fechaSalida = fechaSalida;
+		this.fechaLlegada = fechaLlegada;
+		this.tiempoVuelo = tiempoVuelo;
+	}
 	public void setFechaLlegada(Date fechaLlegada) {
 		this.fechaLlegada = fechaLlegada;
 	}
@@ -56,18 +75,7 @@ public class Vuelos implements Serializable{
 	public void setTiempoVuelo(String tiempoVuelo) {
 		this.tiempoVuelo = tiempoVuelo;
 	}
-	
-	public Vuelos(String numeroVuelo, Integer cantidadAsientos, Aeropuerto aeropuertoSalida,
-			Aeropuerto aeropuertoLlegada, Date fechaSalida, Date fechaLlegada, String tiempoVuelo) {
-		super();
-		this.numeroVuelo = numeroVuelo;
-		this.cantidadAsientos = cantidadAsientos;
-		this.aeropuertoSalida = aeropuertoSalida;
-		this.aeropuertoLlegada = aeropuertoLlegada;
-		this.fechaSalida = fechaSalida;
-		this.fechaLlegada = fechaLlegada;
-		this.tiempoVuelo = tiempoVuelo;
-	}
+
 	
 	public Vuelos() {
 	}

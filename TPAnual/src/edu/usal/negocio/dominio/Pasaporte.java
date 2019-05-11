@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Pasaporte implements Serializable{
 
+	private double id;
 	private String numero;
 	private Pais pais;
 	private String autoridadEmision;
@@ -15,6 +16,12 @@ public class Pasaporte implements Serializable{
 	
 	public String getNumero() {
 		return numero;
+	}
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
@@ -44,15 +51,17 @@ public class Pasaporte implements Serializable{
 		this.fechaVencimiento = fechaVencimiento;
 	}
 	
-	public Pasaporte(String numero, Pais pais, String autoridadEmision, Date fechaEmision, Date fechaVencimiento) {
+	
+	public Pasaporte(double id, String numero, Pais pais, String autoridadEmision, Date fechaEmision,
+			Date fechaVencimiento) {
 		super();
+		this.id = id;
 		this.numero = numero;
 		this.pais = pais;
 		this.autoridadEmision = autoridadEmision;
 		this.fechaEmision = fechaEmision;
 		this.fechaVencimiento = fechaVencimiento;
 	}
-	
 	public Pasaporte() {
 	}
 	

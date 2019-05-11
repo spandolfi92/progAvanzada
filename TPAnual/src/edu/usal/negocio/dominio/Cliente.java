@@ -5,8 +5,10 @@ import java.sql.Date;
 
 public class Cliente implements Serializable{
 	
+
 	private double id;
 	private String nombreApellido;
+
 	private String dni;
 	private Pasaporte pasaporte;
 	private String cuitCuil;

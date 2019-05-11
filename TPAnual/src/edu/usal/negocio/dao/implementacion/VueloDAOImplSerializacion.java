@@ -63,7 +63,7 @@ public class VueloDAOImplSerializacion implements VueloDAO{
 	public void modificarVuelo(Vuelos vueloModificado) throws Exception {
 		listarVuelos();
 		for(int i = 0; i < vuelos.size(); i ++){
-			if(vuelos.get(i).getNumeroVuelo().equals(vueloModificado.getNumeroVuelo()))
+			if(vuelos.get(i).getId()==vueloModificado.getId())
 			{
 				vuelos.set(i, vueloModificado);
 			}
@@ -85,7 +85,7 @@ public class VueloDAOImplSerializacion implements VueloDAO{
 	public void eliminarVuelo(Vuelos vueloElegido) throws Exception {
 		listarVuelos();
 		for(int i = 0; i < vuelos.size(); i ++){
-			if(vuelos.get(i).getNumeroVuelo().equals(vueloElegido.getNumeroVuelo())){
+			if(vuelos.get(i).getId()==vueloElegido.getId()){
 				vuelos.remove(vuelos.get(i));
 			}
 		}
