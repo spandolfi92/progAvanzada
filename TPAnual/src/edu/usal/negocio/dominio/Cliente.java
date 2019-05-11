@@ -7,8 +7,8 @@ public class Cliente implements Serializable{
 	
 
 	private double id;
-	private String nombreApellido;
-
+	private String nombre;
+	private String apellido;
 	private String dni;
 	private Pasaporte pasaporte;
 	private String cuitCuil;
@@ -25,11 +25,18 @@ public class Cliente implements Serializable{
 	public void setId(double id) {
 		this.id = id;
 	}
-	public String getNombreApellido() {
-		return nombreApellido;
+	
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombreApellido(String nombreApellido) {
-		this.nombreApellido = nombreApellido;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		apellido = apellido;
 	}
 	public String getDni() {
 		return dni;
@@ -81,12 +88,14 @@ public class Cliente implements Serializable{
 	}
 	
 	
-	public Cliente(double id, String nombreApellido, String dni, Pasaporte pasaporte, String cuitCuil,
+	
+	public Cliente(double id, String nombre, String apellido, String dni, Pasaporte pasaporte, String cuitCuil,
 			Date fechaNacimiento, String email, Telefono telefono, PasajeroFrecuente pasajeroFrecuente,
 			Direccion direccion) {
 		super();
 		this.id = id;
-		this.nombreApellido = nombreApellido;
+		this.nombre = nombre;
+		this.apellido = apellido;
 		this.dni = dni;
 		this.pasaporte = pasaporte;
 		this.cuitCuil = cuitCuil;
