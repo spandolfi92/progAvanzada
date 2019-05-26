@@ -4,6 +4,7 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class AerolineaDAOImplSerializacion implements AerolineaDAO{
 	private List<Aerolinea> aerolineas = null;
 	
 	@Override
-	public List<Aerolinea> listarAerolineas() throws Exception {
+	public List<Aerolinea> listarAerolineas() throws IOException, ClassNotFoundException {
 		if(aerolineas == null){
 			aerolineas = new ArrayList<Aerolinea>();
 			File file = new File(PropertiesUtil.getPropertyAerolinea());
