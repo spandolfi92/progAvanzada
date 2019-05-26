@@ -17,7 +17,7 @@ import edu.usal.util.PropertiesUtil;
 public class ClienteDAOImplSerializacion implements ClienteDAO{
 
 	
-	private List<Cliente> clientes = null;
+	private List<Cliente> clientes = null; 
 	
 	@Override
 	public List<Cliente> listarClientes() throws IOException, ClassNotFoundException {

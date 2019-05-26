@@ -17,7 +17,7 @@ import edu.usal.util.PropertiesUtil;
 
 public class AerolineaDAOImplSerializacion implements AerolineaDAO{
 
-	private List<Aerolinea> aerolineas = null;
+	private List<Aerolinea> aerolineas = null; 
 	
 	@Override
 	public List<Aerolinea> listarAerolineas() throws IOException, ClassNotFoundException {
