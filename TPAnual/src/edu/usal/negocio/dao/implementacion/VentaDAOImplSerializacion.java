@@ -4,6 +4,7 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class VentaDAOImplSerializacion implements VentaDAO{
 	private List<Ventas> ventas = null;
 
 	@Override
-	public List<Ventas> listarVentas() throws Exception {
+	public List<Ventas> listarVentas() throws IOException, ClassNotFoundException {
 		if(ventas == null){
 			ventas = new ArrayList<Ventas>();
 			File file = new File(PropertiesUtil.getPropertyVenta());
