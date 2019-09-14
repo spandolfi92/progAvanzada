@@ -14,7 +14,7 @@ import edu.usal.negocio.dao.interfaces.VentaDAO;
 import edu.usal.negocio.dominio.Ventas;
 import edu.usal.util.PropertiesUtil;
 
-public class VentaDAOImplSerializacion implements VentaDAO{
+public class VentaDAOImpl implements VentaDAO{
 
 	
 	private List<Ventas> ventas = null;

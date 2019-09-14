@@ -23,26 +23,29 @@ public class PropertiesUtil
 	
 	
 
-	public static String getPropertyCliente()
+	
+	public static String getPropertyUrl()
 	{
-		return prop.getProperty("pathCliente");
+		return prop.getProperty("url");
 	}
 	
-	public static String getPropertyVuelo()
+	public static String getPropertyUser()
 	{
-		return prop.getProperty("pathVuelo");
+		return prop.getProperty("user");
 	}
 	
-	public static String getPropertyVenta()
+	public static String getPropertyPass()
 	{
-		return prop.getProperty("pathVenta");
+		return prop.getProperty("pass");
+	}
+	public static String getPropertyDriver()
+	{
+		return prop.getProperty("driver");
 	}
 	
-	public static String getPropertyAerolinea()
+		public static String getPropertyAerolinea()
 	{
 		return prop.getProperty("pathAerolineas");
 	}
 	
-	
-
 }

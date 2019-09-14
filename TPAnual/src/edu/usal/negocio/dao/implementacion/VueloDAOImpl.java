@@ -10,49 +10,49 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.usal.negocio.dao.interfaces.ClienteDAO;
-import edu.usal.negocio.dominio.Cliente;
+import edu.usal.negocio.dao.interfaces.VueloDAO;
+import edu.usal.negocio.dominio.Ventas;
+import edu.usal.negocio.dominio.Vuelos;
 import edu.usal.util.PropertiesUtil;
 
-public class ClienteDAOImplSerializacion implements ClienteDAO{
+public class VueloDAOImpl implements VueloDAO{
 
-	
-	private List<Cliente> clientes = null; 
-	
+	private List<Vuelos> vuelos = null;
+
 	@Override
-	public List<Cliente> listarClientes() throws IOException, ClassNotFoundException {
-		if(clientes == null){
-			clientes = new ArrayList<Cliente>();
-			File file = new File(PropertiesUtil.getPropertyCliente());
+	public List<Vuelos> listarVuelos() throws IOException, ClassNotFoundException {
+		if(vuelos == null){
+			vuelos = new ArrayList<Vuelos>();
+			File file = new File(PropertiesUtil.getPropertyVuelo());
 			file.createNewFile();
 			FileInputStream fiStream = new FileInputStream(file);
 			ObjectInputStream oiStream = new ObjectInputStream(fiStream);
 			try{
-				clientes = (List<Cliente>)oiStream.readObject();
+				vuelos = (List<Vuelos>)oiStream.readObject();
 				oiStream.close();
 				fiStream.close();
 			} 
 			catch (EOFException e) { 
-				return new ArrayList<Cliente>();
+				return new ArrayList<Vuelos>();
 			}
 			finally{
 				oiStream.close();
 				fiStream.close();
 			}
 		}
-		return clientes;
+		return vuelos;
 	}
 
 	@Override
-	public void altaCliente(Cliente cliente) throws Exception {
-		listarClientes();
-		clientes.add(cliente);
-		File file = new File(PropertiesUtil.getPropertyCliente());
+	public void altaVuelo(Vuelos vuelo) throws Exception {
+		listarVuelos();
+		vuelos.add(vuelo);
+		File file = new File(PropertiesUtil.getPropertyVuelo());
 		FileOutputStream foStream = new FileOutputStream(file);
 		ObjectOutputStream ooStream = new ObjectOutputStream(foStream);
 		try{
 			file.createNewFile();
-			ooStream.writeObject(clientes);
+			ooStream.writeObject(vuelos);
 		}
 		finally{
 			ooStream.close();
@@ -61,20 +61,20 @@ public class ClienteDAOImplSerializacion implements ClienteDAO{
 	}
 
 	@Override
-	public void modificarCliente(Cliente cliente) throws Exception {
-		listarClientes();
-		for(int i = 0; i < clientes.size(); i ++){
-			if(clientes.get(i).getId() == cliente.getId())
+	public void modificarVuelo(Vuelos vueloModificado) throws Exception {
+		listarVuelos();
+		for(int i = 0; i < vuelos.size(); i ++){
+			if(vuelos.get(i).getId()==vueloModificado.getId())
 			{
-				clientes.set(i, cliente);
+				vuelos.set(i, vueloModificado);
 			}
 		}
-		File file = new File(PropertiesUtil.getPropertyCliente());
+		File file = new File(PropertiesUtil.getPropertyVuelo());
 		FileOutputStream foStream = new FileOutputStream(file);
 		ObjectOutputStream ooStream = new ObjectOutputStream(foStream);
 		try{
 			file.createNewFile();
-			ooStream.writeObject(clientes);
+			ooStream.writeObject(vuelos);
 		}
 		finally{
 			ooStream.close();
@@ -83,24 +83,26 @@ public class ClienteDAOImplSerializacion implements ClienteDAO{
 	}
 
 	@Override
-	public void eliminarCliente(double id) throws Exception {
-		listarClientes();
-		for(int i = 0; i < clientes.size(); i ++){
-			if(clientes.get(i).getId() == id){
-				clientes.remove(clientes.get(i));
+	public void eliminarVuelo(Vuelos vueloElegido) throws Exception {
+		listarVuelos();
+		for(int i = 0; i < vuelos.size(); i ++){
+			if(vuelos.get(i).getId()==vueloElegido.getId()){
+				vuelos.remove(vuelos.get(i));
 			}
 		}
-		File file = new File(PropertiesUtil.getPropertyCliente());
+		File file = new File(PropertiesUtil.getPropertyVuelo());
 		FileOutputStream foStream = new FileOutputStream(file);
 		ObjectOutputStream ooStream = new ObjectOutputStream(foStream);
 		try{
 			file.createNewFile();
-			ooStream.writeObject(clientes);
+			ooStream.writeObject(vuelos);
 		}
 		finally{
 			ooStream.close();
 			foStream.close();
 		}
 	}
+	
+	
 
 }

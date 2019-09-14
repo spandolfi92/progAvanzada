@@ -5,9 +5,9 @@ import edu.usal.negocio.dominio.Cliente;
 
 public interface ClienteDAO {
 	
-	public List <Cliente> listarClientes() throws Exception;
-	public void altaCliente (Cliente cliente) throws Exception;
-	public void modificarCliente (Cliente cliente) throws Exception;
-	public void eliminarCliente (double id) throws Exception;
+	public List <Cliente> listarClientes();
+	public void altaCliente (Cliente cliente);
+	public void modificarCliente (Cliente cliente);
+	public void eliminarCliente (double id);
 
 }

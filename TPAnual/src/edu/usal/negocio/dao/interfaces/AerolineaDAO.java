@@ -6,9 +6,9 @@ import edu.usal.negocio.dominio.Aerolinea;
 
 public interface AerolineaDAO {
 	
-	public List <Aerolinea> listarAerolineas() throws Exception;
-	public void altaAerolinea (Aerolinea aerolinea) throws Exception;
-	public void modificarAerolinea (Aerolinea aerolinea) throws Exception;
-	public void eliminarAerolinea (double id) throws Exception;
+	public List <Aerolinea> listarAerolineas();
+	public void altaAerolinea (Aerolinea aerolinea);
+	public void modificarAerolinea (Aerolinea aerolinea);
+	public void eliminarAerolinea (double id);
 
 }

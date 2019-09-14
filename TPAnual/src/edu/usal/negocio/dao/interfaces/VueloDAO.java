@@ -7,9 +7,9 @@ import edu.usal.negocio.dominio.Vuelos;
 
 public interface VueloDAO {
 	
-	public List <Vuelos> listarVuelos() throws Exception;
-	public void altaVuelo (Vuelos vuelo) throws Exception;
-	public void modificarVuelo (Vuelos vuelo) throws Exception;
-	public void eliminarVuelo (Vuelos vuelo) throws Exception;
+	public List <Vuelos> listarVuelos();
+	public void altaVuelo (Vuelos vuelo);
+	public void modificarVuelo (Vuelos vuelo);
+	public void eliminarVuelo (Vuelos vuelo);
 
 }
