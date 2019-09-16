@@ -1,8 +1,6 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
-
-public class Provincia implements Serializable{
+public class Provincia {
 	
 	private String nombre;
 

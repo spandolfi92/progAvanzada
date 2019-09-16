@@ -1,20 +1,18 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
-
-public class Telefono implements Serializable{
+public class Telefono {
 
 	private double id;
+	private String numeroPersonal;
+	private String numeroCelular;
+	private String numeroLaboral;
+	
 	public double getId() {
 		return id;
 	}
 	public void setId(double id) {
 		this.id = id;
 	}
-	private String numeroPersonal;
-	private String numeroCelular;
-	private String numeroLaboral;
-	
 	public String getNumeroPersonal() {
 		return numeroPersonal;
 	}

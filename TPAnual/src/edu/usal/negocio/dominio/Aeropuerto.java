@@ -1,8 +1,6 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
-
-public class Aeropuerto implements Serializable{
+public class Aeropuerto{
 	
 	private double id;
 	private String identificacion;

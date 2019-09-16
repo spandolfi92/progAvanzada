@@ -1,21 +1,19 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
-
-public class PasajeroFrecuente implements Serializable{
+public class PasajeroFrecuente {
+	
 	private double id;
-	private Alianza alianza; //usar como ENUM o String porque son 3
+	private Alianza alianza;
 	private Aerolinea aerolinea;
+	private String numero;
+	private String categoria;
+	
 	public double getId() {
 		return id;
 	}
 	public void setId(double id) {
 		this.id = id;
-	}
-
-	private String numero;
-	private String categoria;
-	
+	}	
 	public Alianza getAlianza() {
 		return alianza;
 	}

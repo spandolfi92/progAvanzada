@@ -6,8 +6,9 @@ import edu.usal.negocio.dominio.Cliente;
 public interface ClienteDAO {
 	
 	public List <Cliente> listarClientes();
+	public Cliente obtenerCliente(String dni);
 	public void altaCliente (Cliente cliente);
 	public void modificarCliente (Cliente cliente);
-	public void eliminarCliente (double id);
+	public void eliminarCliente (String dni);
 
 }

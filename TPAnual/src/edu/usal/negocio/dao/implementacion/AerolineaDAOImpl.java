@@ -13,13 +13,11 @@ import java.util.List;
 import edu.usal.negocio.dao.interfaces.AerolineaDAO;
 import edu.usal.negocio.dominio.Aerolinea;
 import edu.usal.negocio.dominio.Alianza;
-import edu.usal.negocio.dominio.Cliente;
 import edu.usal.util.PropertiesUtil;
 
 public class AerolineaDAOImpl implements AerolineaDAO{
 
 	
-	@SuppressWarnings("unused")
 	private static Connection getConnection() throws SQLException {
 		Connection con = null;
 		try {
@@ -37,28 +35,23 @@ public class AerolineaDAOImpl implements AerolineaDAO{
 		Connection con = null;
 		Statement stm = null;
 		ResultSet rsAerolinea = null;
-		PreparedStatement psAlianza = null;
-		ResultSet rsAlianza = null;
+
 		try {
 			con = getConnection();
 			stm = con.createStatement();
 			rsAerolinea = stm.executeQuery("SELECT * FROM AEROLINEA");
-			psAlianza = con.prepareStatement("SELECT * FROM Alianzas WHERE nombre_alianza = ?");
 			List<Aerolinea> aerolineas = new ArrayList<Aerolinea>();
 
 			while (rsAerolinea.next()) {
 				Aerolinea aerolinea = new Aerolinea();
-				aerolinea.setNombreAerolinea(rsAerolinea.getString("nombre"));
-				aerolinea.setCodigo(rsAerolinea.getString("codigo"));
+				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
+				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
 				
-				
-				psAlianza.setString(1, rsAerolinea.getString("alianza_id"));
-				rsAlianza = psAlianza.executeQuery();
-				rsAlianza.next();
 				Alianza alianza = new Alianza();
-				alianza.setNombre(rsAlianza.getString("nombre_alianza"));
-				aerolinea.setAlianza(alianza);
+				alianza.setNombre(rsAerolinea.getString("alianza"));
 				
+				aerolinea.setAlianza(alianza);
+								
 				aerolineas.add(aerolinea);
 			}
 			return aerolineas;
@@ -82,21 +75,147 @@ public class AerolineaDAOImpl implements AerolineaDAO{
 		}
 	}
 
+	
+	public Aerolinea obtenerAerolinea(String nombre){
+		Connection con = null;
+		PreparedStatement psAerolinea = null;
+		ResultSet rsAerolinea = null;
+		
+		try {
+			con = getConnection();
+			psAerolinea = con.prepareStatement("SELECT * FROM Aerolineas where nombre_aerolinea= ?");
+			
+			
+			psAerolinea.setString(1, nombre);
+			rsAerolinea = psAerolinea.executeQuery();
+			
+			Aerolinea aerolinea = new Aerolinea();
+			aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
+			aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
+			
+			Alianza alianza = new Alianza();
+			alianza.setNombre(rsAerolinea.getString("alianza"));
+
+			aerolinea.setAlianza(alianza);
+				
+			return aerolinea;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		 }finally {
+			try {
+				if (!psAerolinea.isClosed()) {
+					psAerolinea.close();
+				}
+				
+				if (!con.isClosed())
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+	}
+	
+	
+	
+	
 	@Override
 	public void altaAerolinea(Aerolinea aerolinea) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement psAerolinea = null;
+		try{
+			con = getConnection();
+			psAerolinea=con.prepareStatement("INSERT INTO Aerolinea VALUES(NEXT VALUE FOR seq_aerolinea, ?, ?)");
+			
+			psAerolinea.setString(2, aerolinea.getNombre());
+			psAerolinea.setString(3, aerolinea.getAlianza().getNombre());
+			
+			psAerolinea.execute();
+					
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(!psAerolinea.isClosed()){
+					psAerolinea.close();
+				}
+				if(!con.isClosed()){
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
 	@Override
 	public void modificarAerolinea(Aerolinea aerolinea) {
-		// TODO Auto-generated method stub
+		Connection con = null;
+		PreparedStatement psAerolinea = null;
+		try{
+			con = getConnection();
+			psAerolinea=con.prepareStatement("UPDATE Aerolinea SET nombre = ? , alianza = ? WHERE nombre = ?");
+			
+			psAerolinea.setString(1, aerolinea.getNombre());
+			psAerolinea.setString(2, aerolinea.getAlianza().getNombre());
+			psAerolinea.setString(3, aerolinea.getNombre());
+			
+			psAerolinea.execute();
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(!psAerolinea.isClosed()){
+					psAerolinea.close();
+				}
+				if(!con.isClosed()){
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
 	@Override
-	public void eliminarAerolinea(double id) {
-		// TODO Auto-generated method stub
+	public void eliminarAerolinea(String nombre) {
+		Connection con = null;
+		PreparedStatement psAerolinea = null;
+		try{
+			con = getConnection();
+			psAerolinea=con.prepareStatement("DELETE FROM Aerolinea WHERE nombre = ?");
+			
+			psAerolinea.setString(1, nombre);
+			
+			psAerolinea.execute();
+
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(!psAerolinea.isClosed()) {
+					psAerolinea.close();
+				}
+				if(!con.isClosed()){
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 

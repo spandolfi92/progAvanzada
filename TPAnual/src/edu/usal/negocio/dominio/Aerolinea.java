@@ -1,13 +1,11 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Aerolinea implements Serializable{
+public class Aerolinea {
 	 
 	private double id;
 	private String nombre;
-	private String codigo;
 	private Alianza alianza;
 	private List<Vuelos> vuelos;
 	
@@ -23,12 +21,6 @@ public class Aerolinea implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
 	public Alianza getAlianza() {
 		return alianza;
 	}
@@ -42,13 +34,15 @@ public class Aerolinea implements Serializable{
 		this.vuelos = vuelos;
 	}
 	
-	public Aerolinea(double id, String nombre, String codigo, Alianza alianza, List<Vuelos> vuelos) {
+	public Aerolinea(double id, String nombre, Alianza alianza, List<Vuelos> vuelos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.codigo = codigo;
 		this.alianza = alianza;
 		this.vuelos = vuelos;
+	}
+	public Aerolinea() {
+	
 	}
 	
 

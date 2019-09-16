@@ -1,18 +1,11 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
-public class Vuelos implements Serializable{
+public class Vuelos {
+	
 	private double id;
-	public double getId() {
-		return id;
-	}
-	public void setId(double id) {
-		this.id = id;
-	}
-
 	private String numeroVuelo;
 	private Integer cantidadAsientos;
 	private Aeropuerto aeropuertoSalida;
@@ -21,6 +14,12 @@ public class Vuelos implements Serializable{
 	private Date fechaLlegada;
 	private String tiempoVuelo;
 	
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	public String getNumeroVuelo() {
 		return numeroVuelo;
 	}

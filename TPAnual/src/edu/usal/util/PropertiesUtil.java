@@ -43,9 +43,9 @@ public class PropertiesUtil
 		return prop.getProperty("driver");
 	}
 	
-		public static String getPropertyAerolinea()
+		public static String getPropertyAlianza()
 	{
-		return prop.getProperty("pathAerolineas");
+		return prop.getProperty("pathAlianzas");
 	}
 	
 }

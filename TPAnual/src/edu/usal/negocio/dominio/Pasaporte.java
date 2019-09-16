@@ -1,10 +1,9 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
-public class Pasaporte implements Serializable{
+public class Pasaporte {
 
 	private double id;
 	private String numero;

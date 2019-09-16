@@ -1,21 +1,11 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
 
-public class Alianza implements Serializable{
+public class Alianza{
 
-	private double id;
 	private String nombre;
 	
 	
-	public double getId() {
-		return id;
-	}
-
-	public void setId(double id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -26,9 +16,7 @@ public class Alianza implements Serializable{
 
 	
 
-	public Alianza(double id, String nombre) {
-		super();
-		this.id = id;
+	public Alianza(String nombre) {
 		this.nombre = nombre;
 	}
 

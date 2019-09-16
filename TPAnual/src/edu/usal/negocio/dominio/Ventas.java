@@ -1,24 +1,23 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
 import java.util.Date;
 
 
-public class Ventas implements Serializable{
+public class Ventas {
+	
 	private double id;
-	public double getId() {
-		return id;
-	}
-	public void setId(double id) {
-		this.id = id;
-	}
-
 	private Cliente cliente;
 	private Vuelos vuelo;
 	private Aerolinea aerolinea;
 	private Date fechaVenta;
 	private String formaPago;
 	
+	public double getId() {
+		return id;
+	}
+	public void setId(double id) {
+		this.id = id;
+	}
 	public Cliente getCliente() {
 		return cliente;
 	}

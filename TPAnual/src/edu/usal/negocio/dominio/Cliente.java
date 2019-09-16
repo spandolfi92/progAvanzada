@@ -1,9 +1,8 @@
 package edu.usal.negocio.dominio;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-public class Cliente implements Serializable{
+public class Cliente{
 	
 
 	private double id;
