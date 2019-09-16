@@ -1,7 +1,7 @@
 package edu.usal.negocio.dao.interfaces;
 
 import java.util.List;
-import edu.usal.negocio.dominio.Cliente;
+
 import edu.usal.negocio.dominio.Ventas;
 
 public interface VentaDAO {

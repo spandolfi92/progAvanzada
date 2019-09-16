@@ -124,8 +124,8 @@ public class ClienteDAOImpl implements ClienteDAO{
 				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
 				Alianza alianza2 = new Alianza();
-				alianza.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza);
+				alianza2.setNombre(rsAerolinea.getString("alianza"));
+				aerolinea.setAlianza(alianza2);
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
 				psDireccion.setInt(1, rsDireccion.getInt("id_direccion"));
@@ -291,11 +291,11 @@ public class ClienteDAOImpl implements ClienteDAO{
 				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
 				Alianza alianza2 = new Alianza();
-				alianza.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza);
+				alianza2.setNombre(rsAerolinea.getString("alianza"));
+				aerolinea.setAlianza(alianza2);
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
-				psDireccion.setInt(1, rsDireccion.getInt("id_direccion"));
+				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
 				rsDireccion = psDireccion.executeQuery(); 
 				Direccion direccion = new Direccion();
 				direccion.setId(rsDireccion.getDouble("id_direccion"));

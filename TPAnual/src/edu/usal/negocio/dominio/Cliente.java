@@ -35,7 +35,7 @@ public class Cliente{
 		return apellido;
 	}
 	public void setApellido(String apellido) {
-		apellido = apellido;
+		this.apellido = apellido;
 	}
 	public String getDni() {
 		return dni;
