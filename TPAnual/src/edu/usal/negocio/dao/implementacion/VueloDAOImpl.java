@@ -96,7 +96,7 @@ public class VueloDAOImpl implements VueloDAO{
 				rsProvincia = psProvincia.executeQuery(); 
 				Provincia provincia = new Provincia();
 				provincia.setId(rsProvincia.getDouble("id_provincia"));
-				
+			
 				provincia.setNombre(rsProvincia.getString("nombre_provincia"));
 				aeropuerto.setProvincia(provincia); 
 				vuelo.setAeropuertoLlegada(aeropuerto);
