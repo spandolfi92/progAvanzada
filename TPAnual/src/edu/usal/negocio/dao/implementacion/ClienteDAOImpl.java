@@ -128,7 +128,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 				aerolinea.setAlianza(alianza2);
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
-				psDireccion.setInt(1, rsDireccion.getInt("id_direccion"));
+				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
 				rsDireccion = psDireccion.executeQuery(); 
 				Direccion direccion = new Direccion();
 				direccion.setId(rsDireccion.getDouble("id_direccion"));

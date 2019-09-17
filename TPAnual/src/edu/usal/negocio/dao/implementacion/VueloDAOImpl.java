@@ -69,15 +69,15 @@ public class VueloDAOImpl implements VueloDAO{
 				
 
 				Vuelos vuelo = new Vuelos();
-				vuelo.setId(rsVuelo.getInt("id_vuelo"));
-				vuelo.setNumeroVuelo(rsVuelo.getString("nombre_vuelo"));
-				vuelo.setCantidadAsientos(rsVuelo.getInt("cant_asientos"));
-				vuelo.setFechaLlegada(rsVuelo.getDate("fecha_hs_llegada"));
-				vuelo.setFechaSalida(rsVuelo.getDate("fecha_hs_salida"));
-				vuelo.setTiempoVuelo(rsVuelo.getString("tiempo_vuelo"));
+				vuelo.setId(rsVuelos.getInt("id_vuelo"));
+				vuelo.setNumeroVuelo(rsVuelos.getString("nombre_vuelo"));
+				vuelo.setCantidadAsientos(rsVuelos.getInt("cant_asientos"));
+				vuelo.setFechaLlegada(rsVuelos.getDate("fecha_hs_llegada"));
+				vuelo.setFechaSalida(rsVuelos.getDate("fecha_hs_salida"));
+				vuelo.setTiempoVuelo(rsVuelos.getString("tiempo_vuelo"));
 				
 				//aeropuertollegada
-				psAeropuerto.setInt(1, rsVuelo.getInt("id_aeropuerto_llegada"));
+				psAeropuerto.setInt(1, rsVuelos.getInt("id_aeropuerto_llegada"));
 				rsAeropuerto = psAeropuerto.executeQuery(); 
 
 				Aeropuerto aeropuerto = new Aeropuerto();
@@ -103,7 +103,7 @@ public class VueloDAOImpl implements VueloDAO{
 				
 				//aeropuertosalida
 				
-				psAeropuerto.setInt(1, rsVuelo.getInt("id_aeropuerto_salida"));
+				psAeropuerto.setInt(1, rsVuelos.getInt("id_aeropuerto_salida"));
 				rsAeropuerto = psAeropuerto.executeQuery(); 
 
 				Aeropuerto aeropuertosalida = new Aeropuerto();
@@ -351,11 +351,12 @@ public class VueloDAOImpl implements VueloDAO{
 			con = getConnection();
 			psVuelo=con.prepareStatement("UPDATE VUELOS SET nro_vuelo = ? , cant_asientos = ?, fecha_hs_salida = ?, fecha_hs_llegada = ?, tiempo_vuelo = ? WHERE nro_vuelo = ?");
 			
-			psVuelo.setString(2, vuelo.getNumeroVuelo());
-			psVuelo.setInt(3, vuelo.getCantidadAsientos());
-			psVuelo.setDate(4, (Date) vuelo.getFechaSalida());
-			psVuelo.setDate(5, (Date) vuelo.getFechaLlegada());
-			psVuelo.setString(6, vuelo.getTiempoVuelo());
+			psVuelo.setString(1, vuelo.getNumeroVuelo());
+			psVuelo.setInt(2, vuelo.getCantidadAsientos());
+			psVuelo.setDate(3, (Date) vuelo.getFechaSalida());
+			psVuelo.setDate(4, (Date) vuelo.getFechaLlegada());
+			psVuelo.setString(5, vuelo.getTiempoVuelo());
+			psVuelo.setString(5, vuelo.getNumeroVuelo());
 
 			psVuelo.execute();
 			

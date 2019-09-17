@@ -43,7 +43,6 @@ public class VentaDAOImpl implements VentaDAO{
 		Connection con = null;
 		Statement stm = null;
 
-		PreparedStatement psVentas = null;
 		PreparedStatement psVuelos = null;
 		PreparedStatement psAeropuerto = null;
 		PreparedStatement psAerolinea = null;
@@ -96,10 +95,10 @@ public class VentaDAOImpl implements VentaDAO{
 				Ventas venta = new Ventas();
 				venta.setId(rsVentas.getInt("id_venta"));
 				venta.setFechaVenta(rsVentas.getDate("fecha_hs_venta"));
-				venta.setFormaPago(rsVentas.getString("cant_asientos"));
+				venta.setFormaPago(rsVentas.getString("forma_pago"));
 				
 			// ID CLIENTE
-				psCliente.setInt(1, rsVentas.getInt("id_venta"));
+				psCliente.setInt(1, rsVentas.getInt("id_cliente"));
 				rsCliente = psCliente.executeQuery(); 
 				Cliente cliente = new Cliente();
 				cliente.setId(rsCliente.getInt("id_cliente"));
@@ -158,7 +157,7 @@ public class VentaDAOImpl implements VentaDAO{
 				aerolinea.setAlianza(alianza2);
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
-				psDireccion.setInt(1, rsDireccion.getInt("id_direccion"));
+				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
 				rsDireccion = psDireccion.executeQuery(); 
 				Direccion direccion = new Direccion();
 				direccion.setId(rsDireccion.getDouble("id_direccion"));
@@ -338,7 +337,6 @@ public class VentaDAOImpl implements VentaDAO{
 	
 	public Ventas obtenerVenta(String cdoVenta){
 		Connection con = null;
-		Statement stm = null;
 
 		PreparedStatement psVentas = null;
 		PreparedStatement psVuelos = null;
@@ -392,7 +390,7 @@ public class VentaDAOImpl implements VentaDAO{
 				Ventas venta = new Ventas();
 				venta.setId(rsVentas.getInt("id_venta"));
 				venta.setFechaVenta(rsVentas.getDate("fecha_hs_venta"));
-				venta.setFormaPago(rsVentas.getString("cant_asientos"));
+				venta.setFormaPago(rsVentas.getString("forma_pago"));
 				
 			// ID CLIENTE
 				psCliente.setInt(1, rsVentas.getInt("id_venta"));
@@ -454,7 +452,7 @@ public class VentaDAOImpl implements VentaDAO{
 				aerolinea.setAlianza(alianza2);
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
-				psDireccion.setInt(1, rsDireccion.getInt("id_direccion"));
+				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
 				rsDireccion = psDireccion.executeQuery(); 
 				Direccion direccion = new Direccion();
 				direccion.setId(rsDireccion.getDouble("id_direccion"));
@@ -675,13 +673,14 @@ public class VentaDAOImpl implements VentaDAO{
 		PreparedStatement psVenta = null;
 		try{
 			con = getConnection();
-			psVenta=con.prepareStatement("UPDATE VENTAS SET fecha_hs_venta = ? , forma_pago = ?, id_cliente = ?, id_vuelo = ?, id_aerolinea = ? WHERE nro_venta = ?");
+			psVenta=con.prepareStatement("UPDATE VENTAS SET fecha_hs_venta = ? , forma_pago = ?, id_cliente = ?, id_vuelo = ?, id_aerolinea = ? WHERE id_venta = ?");
 			
-			psVenta.setDate(2, (Date) venta.getFechaVenta());
-			psVenta.setString(3, venta.getFormaPago());
-			psVenta.setDouble(4, venta.getCliente().getId());
-			psVenta.setDouble(5, venta.getVuelo().getId());
-			psVenta.setDouble(6, venta.getAerolinea().getId());
+			psVenta.setDate(1, (Date) venta.getFechaVenta());
+			psVenta.setString(2, venta.getFormaPago());
+			psVenta.setDouble(3, venta.getCliente().getId());
+			psVenta.setDouble(4, venta.getVuelo().getId());
+			psVenta.setDouble(5, venta.getAerolinea().getId());
+			psVenta.setDouble(6, venta.getId());
 
 			psVenta.execute();
 			
