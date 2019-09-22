@@ -17,18 +17,6 @@ import edu.usal.util.PropertiesUtil;
 public class PaisDAOImpl implements PaisDAO{
 
 	
-	private static Connection getConnection() throws SQLException {
-		Connection con = null;
-		try {
-			Class.forName(PropertiesUtil.getPropertyDriver());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		con = DriverManager.getConnection(PropertiesUtil.getPropertyUrl(), PropertiesUtil.getPropertyUser(), PropertiesUtil.getPropertyPass());
-		return con;
-	}
-	
-	
 	@Override
 	public List<Pais> listarPaises() {
 		Connection con = null;
@@ -36,7 +24,7 @@ public class PaisDAOImpl implements PaisDAO{
 		ResultSet rsPais = null;
 
 		try {
-			con = getConnection();
+			con = Connect.getConnection();
 			stm = con.createStatement();
 			rsPais = stm.executeQuery("SELECT * FROM PAIS");
 			List<Pais> paiss = new ArrayList<Pais>();
@@ -75,12 +63,13 @@ public class PaisDAOImpl implements PaisDAO{
 		ResultSet rsPais = null;
 		
 		try {
-			con = getConnection();
+			con = Connect.getConnection();
 			psPais = con.prepareStatement("SELECT * FROM Pais where nombre_pais= ?");
 			
 			
 			psPais.setString(1, nombre);
 			rsPais = psPais.executeQuery();
+			rsPais.next();
 			
 			Pais pais = new Pais();
 			pais.setId(rsPais.getInt("id_pais"));

@@ -7,10 +7,10 @@ public class Pasaporte {
 
 	private double id;
 	private String numero;
-	private Pais pais;
 	private String autoridadEmision;
 	private Date fechaEmision;
 	private Date fechaVencimiento;
+	private Pais pais;
 	
 	
 	public String getNumero() {

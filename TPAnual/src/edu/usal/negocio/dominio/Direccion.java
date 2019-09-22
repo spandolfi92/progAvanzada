@@ -6,9 +6,10 @@ public class Direccion {
 	private String calle;
 	private String altura;
 	private String ciudad;
+	private String codigoPostal;
 	private Provincia provincia;
 	private Pais pais;
-	private String codigoPostal;
+	
 	
 	
 	public double getId() {

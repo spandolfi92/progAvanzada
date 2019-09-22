@@ -1,6 +1,6 @@
 package edu.usal.negocio.dominio;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Cliente{
 	
@@ -9,10 +9,10 @@ public class Cliente{
 	private String nombre;
 	private String apellido;
 	private String dni;
-	private Pasaporte pasaporte;
 	private String cuitCuil;
 	private Date fechaNacimiento;
 	private String email;
+	private Pasaporte pasaporte;
 	private Telefono telefono;
 	private PasajeroFrecuente pasajeroFrecuente;
 	private Direccion direccion;

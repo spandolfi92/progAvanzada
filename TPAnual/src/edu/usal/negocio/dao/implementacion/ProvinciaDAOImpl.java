@@ -17,18 +17,6 @@ import edu.usal.util.PropertiesUtil;
 public class ProvinciaDAOImpl implements ProvinciaDAO{
 
 	
-	private static Connection getConnection() throws SQLException {
-		Connection con = null;
-		try {
-			Class.forName(PropertiesUtil.getPropertyDriver());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		con = DriverManager.getConnection(PropertiesUtil.getPropertyUrl(), PropertiesUtil.getPropertyUser(), PropertiesUtil.getPropertyPass());
-		return con;
-	}
-	
-	
 	@Override
 	public List<Provincia> listarProvincias() {
 		Connection con = null;
@@ -36,7 +24,7 @@ public class ProvinciaDAOImpl implements ProvinciaDAO{
 		ResultSet rsProvincia = null;
 
 		try {
-			con = getConnection();
+			con = Connect.getConnection();
 			stm = con.createStatement();
 			rsProvincia = stm.executeQuery("SELECT * FROM PROVINCIA");
 			List<Provincia> provincias = new ArrayList<Provincia>();
@@ -76,12 +64,13 @@ public class ProvinciaDAOImpl implements ProvinciaDAO{
 		ResultSet rsProvincia = null;
 		
 		try {
-			con = getConnection();
+			con = Connect.getConnection();
 			psProvincia = con.prepareStatement("SELECT * FROM Provincias where nombre_provincia= ?");
 			
 			
 			psProvincia.setString(1, nombre);
 			rsProvincia = psProvincia.executeQuery();
+			rsProvincia.next();
 			
 			Provincia provincia = new Provincia();
 			provincia.setId(rsProvincia.getInt("id_provincia"));

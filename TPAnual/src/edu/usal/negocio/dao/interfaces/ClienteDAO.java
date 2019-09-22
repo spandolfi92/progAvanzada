@@ -7,7 +7,7 @@ public interface ClienteDAO {
 	
 	public List <Cliente> listarClientes();
 	public Cliente obtenerCliente(String dni);
-	public void altaCliente (Cliente cliente);
+	public double altaCliente (Cliente cliente);
 	public void modificarCliente (Cliente cliente);
 	public void eliminarCliente (String dni);
 

@@ -10,6 +10,6 @@ public interface AerolineaDAO {
 	public Aerolinea obtenerAerolinea(String nombre);
 	public void altaAerolinea (Aerolinea aerolinea);
 	public void modificarAerolinea (Aerolinea aerolinea);
-	public void eliminarAerolinea (String nombre);
+	public void eliminarAerolinea (double id);
 
 }

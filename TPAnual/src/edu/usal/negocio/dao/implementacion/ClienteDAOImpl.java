@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.usal.negocio.dao.interfaces.ClienteDAO;
@@ -24,49 +25,33 @@ import edu.usal.util.PropertiesUtil;
 public class ClienteDAOImpl implements ClienteDAO{
 	
 
-	private static Connection getConnection() throws SQLException {
-		Connection con = null;
-		try {
-			Class.forName(PropertiesUtil.getPropertyDriver());
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		con = DriverManager.getConnection(PropertiesUtil.getPropertyUrl(), PropertiesUtil.getPropertyUser(), PropertiesUtil.getPropertyPass());
-		return con;
-	}
-
 	@Override
 	public List<Cliente> listarClientes() {
 		Connection con = null;
 		Statement stm = null;
 		ResultSet rsCliente = null;
-		PreparedStatement psPasaporte = null;
-		ResultSet rsPasaporte = null;
-		PreparedStatement psTelefono = null;
-		ResultSet rsTelefono = null;
-		PreparedStatement psPasajeroFrecuente = null;
-		ResultSet rsPasajeroFrecuente = null;
-		PreparedStatement psDireccion = null;
-		ResultSet rsDireccion = null;
-		PreparedStatement psPais = null;
-		ResultSet rsPais = null;
-		PreparedStatement psAerolinea = null;
-		ResultSet rsAerolinea = null;
-		PreparedStatement psProvincia = null;
-		ResultSet rsProvincia = null;
-
-
+		
 		try {
-			con = getConnection();
+			con = Connect.getConnection();
 			stm = con.createStatement();
-			rsCliente = stm.executeQuery("SELECT * FROM CLIENTE");
-			psPasaporte = con.prepareStatement("SELECT * FROM Pasaporte where id_cliente= ?");
-			psTelefono = con.prepareStatement("SELECT * FROM Telefono where id_cliente= ?");
-			psPasajeroFrecuente = con.prepareStatement("SELECT * FROM pasajero_frecuente where id_cliente= ?");
-			psDireccion = con.prepareStatement("SELECT * FROM Direccion where id_cliente= ?");
-			psPais = con.prepareStatement("SELECT * FROM PAIS where id_pais= ?");
-			psAerolinea = con.prepareStatement("SELECT * FROM Aerolineas where id_aerolinea= ?");
-			psProvincia = con.prepareStatement("SELECT * FROM PROVINCIA where id_provincia= ?");
+			rsCliente = stm.executeQuery("SELECT cliente.id_cliente, cliente.nombre, cliente.apellido, cliente.dni, cliente.cuit_cuil, cliente.fecha_nacimiento, cliente.email,\r\n" + 
+					"pasaporte.id_pasaporte, pasaporte.nro_pasaporte, pasaporte.autoridad_emision, pasaporte.fecha_emision, pasaporte.fecha_vencimiento,\r\n" + 
+					"pais.id_pais, pais.nombre_pais,\r\n" + 
+					"telefono.id_telefono, telefono.personal, telefono.celular, telefono.laboral,\r\n" + 
+					"pasajero_frecuente.id_pasajero_frecuente, pasajero_frecuente.alianza, pasajero_frecuente.numero, pasajero_frecuente.categoria,\r\n" + 
+					"aerolinea.id_aerolinea, aerolinea.nombre_aerolinea, aerolinea.alianza,\r\n" + 
+					"direccion.id_direccion, direccion.calle, direccion.altura, direccion.ciudad, direccion.codigo_postal,\r\n" + 
+					"provincia.id_provincia, provincia.nombre_provincia,\r\n" + 
+					"a.id_pais, a.nombre_pais\r\n" + 
+					"FROM cliente\r\n" + 
+					"JOIN pasaporte on cliente.id_cliente = pasaporte.id_cliente\r\n" + 
+					"JOIN pais on pasaporte.id_pais = pais.id_pais\r\n" + 
+					"JOIN telefono on cliente.id_cliente = telefono.id_cliente\r\n" + 
+					"JOIN pasajero_frecuente on cliente.id_cliente = pasajero_frecuente.id_cliente\r\n" + 
+					"JOIN aerolinea on pasajero_frecuente.id_aerolinea = aerolinea.id_aerolinea\r\n" + 
+					"JOIN direccion on cliente.id_cliente = direccion.id_cliente\r\n" + 
+					"JOIN provincia on direccion.id_provincia = provincia.id_provincia\r\n" + 
+					"JOIN pais a on direccion.id_provincia = a.id_pais");
 			
 			List<Cliente> clientes = new ArrayList<Cliente>();
 
@@ -77,80 +62,54 @@ public class ClienteDAOImpl implements ClienteDAO{
 				cliente.setApellido(rsCliente.getString("apellido"));
 				cliente.setDni(rsCliente.getString("dni"));
 				cliente.setCuitCuil(rsCliente.getString("cuit_cuil"));
-				cliente.setFechaNacimiento(rsCliente.getDate("fecha_nacimiento"));
+				cliente.setFechaNacimiento(new Date(rsCliente.getDate("fecha_nacimiento").getTime()));
 				cliente.setEmail(rsCliente.getString("email"));
 
-				
-				psPasaporte.setInt(1, rsCliente.getInt("id_cliente"));
-				rsPasaporte = psPasaporte.executeQuery(); 
 				Pasaporte pasaporte = new Pasaporte();
-				pasaporte.setId(rsPasaporte.getDouble("id_pasaporte"));
-				pasaporte.setNumero(rsPasaporte.getString("nro_pasaporte"));
-				pasaporte.setAutoridadEmision(rsPasaporte.getString("autoridad_emision"));
-				pasaporte.setFechaEmision(rsPasaporte.getDate("fecha_emision"));
-				pasaporte.setFechaVencimiento(rsPasaporte.getDate("fecha_vencimiento"));
+				pasaporte.setId(rsCliente.getInt("id_pasaporte"));
+				pasaporte.setNumero(rsCliente.getString("nro_pasaporte"));
+				pasaporte.setAutoridadEmision(rsCliente.getString("autoridad_emision"));
+				pasaporte.setFechaEmision(new Date(rsCliente.getDate("fecha_emision").getTime()));
+				pasaporte.setFechaVencimiento(new Date(rsCliente.getDate("fecha_vencimiento").getTime()));
+				Pais paisPasaporte = new Pais();
+				paisPasaporte.setId(rsCliente.getInt("id_pais"));
+				paisPasaporte.setNombre(rsCliente.getString("nombre_pais"));
+				pasaporte.setPais(paisPasaporte);
+				cliente.setPasaporte(pasaporte);
 				
-				psPais.setInt(1, rsCliente.getInt("id_pais"));
-				rsPais = psPais.executeQuery(); 
-				Pais pais = new Pais();
-				pais.setId(rsPais.getDouble("id_pais"));
-				pais.setNombre(rsPais.getString("nombre_pais"));
-				pasaporte.setPais(pais); 
-				
-				cliente.setPasaporte(pasaporte); 
-				
-				psTelefono.setInt(1, rsCliente.getInt("id_cliente"));
-				rsTelefono = psTelefono.executeQuery(); 
 				Telefono telefono = new Telefono();
-				telefono.setId(rsTelefono.getDouble("id_telefono"));
-				telefono.setNumeroPersonal(rsTelefono.getString("personal"));
-				telefono.setNumeroCelular(rsTelefono.getString("celular"));
-				telefono.setNumeroLaboral(rsTelefono.getString("laboral"));
+				telefono.setId(rsCliente.getInt("id_telefono"));
+				telefono.setNumeroPersonal(rsCliente.getString("personal"));
+				telefono.setNumeroCelular(rsCliente.getString("celular"));
+				telefono.setNumeroLaboral(rsCliente.getString("laboral"));
+				cliente.setTelefono(telefono);
 				
-				psPasajeroFrecuente.setInt(1, rsCliente.getInt("id_cliente"));
-				rsPasajeroFrecuente = psPasajeroFrecuente.executeQuery(); 
 				PasajeroFrecuente pasajeroFrecuente = new PasajeroFrecuente();
-				pasajeroFrecuente.setId(rsPasajeroFrecuente.getDouble("id_pasajero_frecuente"));
-				pasajeroFrecuente.setNumero(rsPasajeroFrecuente.getString("numero"));
-				pasajeroFrecuente.setCategoria(rsPasajeroFrecuente.getString("categoria"));
-				
-				Alianza alianza = new Alianza();
-				alianza.setNombre(rsPasajeroFrecuente.getString("alianza"));
-				pasajeroFrecuente.setAlianza(alianza);
-				
-				psAerolinea.setInt(1, rsPasajeroFrecuente.getInt("id_aerolinea"));
-				rsAerolinea = psAerolinea.executeQuery();
+				pasajeroFrecuente.setId(rsCliente.getInt("id_pasajero_frecuente"));
+				pasajeroFrecuente.setAlianza(rsCliente.getString("alianza"));
+				pasajeroFrecuente.setNumero(rsCliente.getString("numero"));
+				pasajeroFrecuente.setCategoria(rsCliente.getString("categoria"));
 				Aerolinea aerolinea = new Aerolinea();
-				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
-				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza2 = new Alianza();
-				alianza2.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza2);
+				aerolinea.setId(rsCliente.getInt("id_aerolinea"));
+				aerolinea.setNombre(rsCliente.getString("nombre_aerolinea"));
+				aerolinea.setAlianza(rsCliente.getString("alianza"));
 				pasajeroFrecuente.setAerolinea(aerolinea);
+				cliente.setPasajeroFrecuente(pasajeroFrecuente);
 				
-				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
-				rsDireccion = psDireccion.executeQuery(); 
 				Direccion direccion = new Direccion();
-				direccion.setId(rsDireccion.getDouble("id_direccion"));
-				direccion.setCalle(rsDireccion.getString("calle"));
-				direccion.setAltura(rsDireccion.getString("altura"));
-				direccion.setCiudad(rsDireccion.getString("ciudad"));
-				direccion.setCodigoPostal(rsDireccion.getString("codigo_Postal"));
-				
-				psPais.setInt(1, rsDireccion.getInt("id_pais"));
-				rsPais = psPais.executeQuery(); 
-				Pais pais2 = new Pais();
-				pais2.setId(rsPais.getDouble("id_pais"));
-				pais2.setNombre(rsPais.getString("nombre_pais"));
-				direccion.setPais(pais2);
-				
-				psProvincia.setInt(1, rsDireccion.getInt("id_provincia"));
-				rsProvincia = psProvincia.executeQuery(); 
+				direccion.setId(rsCliente.getInt("id_direccion"));
+				direccion.setCalle(rsCliente.getString("calle"));
+				direccion.setAltura(rsCliente.getString("altura"));
+				direccion.setCiudad(rsCliente.getString("ciudad"));
+				direccion.setCodigoPostal(rsCliente.getString("codigo_postal"));
 				Provincia provincia = new Provincia();
-				provincia.setId(rsProvincia.getDouble("id_provincia"));
-				provincia.setNombre(rsProvincia.getString("nombre_provincia"));
-				direccion.setProvincia(provincia); 
-				
+				provincia.setId(rsCliente.getInt("id_provincia"));
+				provincia.setNombre(rsCliente.getString("nombre_provincia"));
+				direccion.setProvincia(provincia);
+				Pais PaisDireccion = new Pais();
+				PaisDireccion.setId(rsCliente.getInt("id_pais"));
+				PaisDireccion.setNombre(rsCliente.getString("nombre_pais"));
+				direccion.setPais(PaisDireccion);
 				cliente.setDireccion(direccion);
 				
 				clientes.add(cliente);
@@ -168,34 +127,6 @@ public class ClienteDAOImpl implements ClienteDAO{
 					stm.close();
 				}
 				
-				if (!psPasaporte.isClosed()) {
-					psPasaporte.close();
-				}
-				
-				if (!psTelefono.isClosed()) {
-					psTelefono.close();
-				}
-				
-				if (!psPasajeroFrecuente.isClosed()) {
-					psPasajeroFrecuente.close();
-				}
-				
-				if (!psDireccion.isClosed()) {
-					psDireccion.close();
-				}
-				
-				if (!psPais.isClosed()) {
-					psPais.close();
-				}
-				
-				if (!psAerolinea.isClosed()) {
-					psAerolinea.close();
-				}
-				
-				if (!psProvincia.isClosed()) {
-					psProvincia.close();
-				}
-				
 				if (!con.isClosed())
 					con.close();
 			} catch (SQLException e) {
@@ -208,118 +139,90 @@ public class ClienteDAOImpl implements ClienteDAO{
 		Connection con = null;
 		PreparedStatement psCliente = null;
 		ResultSet rsCliente = null;
-		PreparedStatement psPasaporte = null;
-		ResultSet rsPasaporte = null;
-		PreparedStatement psTelefono = null;
-		ResultSet rsTelefono = null;
-		PreparedStatement psPasajeroFrecuente = null;
-		ResultSet rsPasajeroFrecuente = null;
-		PreparedStatement psDireccion = null;
-		ResultSet rsDireccion = null;
-		PreparedStatement psPais = null;
-		ResultSet rsPais = null;
-		PreparedStatement psAerolinea = null;
-		ResultSet rsAerolinea = null;
-		PreparedStatement psProvincia = null;
-		ResultSet rsProvincia = null;
-
-
+		
 		try {
-			con = getConnection();
-			psCliente = con.prepareStatement("SELECT * FROM CLIENTE where dni= ?");
-			psPasaporte = con.prepareStatement("SELECT * FROM Pasaporte where id_cliente= ?");
-			psTelefono = con.prepareStatement("SELECT * FROM Telefono where id_cliente= ?");
-			psPasajeroFrecuente = con.prepareStatement("SELECT * FROM pasajero_frecuente where id_cliente= ?");
-			psDireccion = con.prepareStatement("SELECT * FROM Direccion where id_cliente= ?");
-			psPais = con.prepareStatement("SELECT * FROM PAIS where id_pais= ?");
-			psAerolinea = con.prepareStatement("SELECT * FROM Aerolineas where id_aerolinea= ?");
-			psProvincia = con.prepareStatement("SELECT * FROM PROVINCIA where id_provincia= ?");
+			con = Connect.getConnection();
+			psCliente = con.prepareStatement("SELECT cliente.id_cliente, cliente.nombre, cliente.apellido, cliente.dni, cliente.cuit_cuil, cliente.fecha_nacimiento, cliente.email,\r\n" + 
+					"pasaporte.id_pasaporte, pasaporte.nro_pasaporte, pasaporte.autoridad_emision, pasaporte.fecha_emision, pasaporte.fecha_vencimiento,\r\n" + 
+					"pais.id_pais, pais.nombre_pais,\r\n" + 
+					"telefono.id_telefono, telefono.personal, telefono.celular, telefono.laboral,\r\n" + 
+					"pasajero_frecuente.id_pasajero_frecuente, pasajero_frecuente.alianza, pasajero_frecuente.numero, pasajero_frecuente.categoria,\r\n" + 
+					"aerolinea.id_aerolinea, aerolinea.nombre_aerolinea, aerolinea.alianza,\r\n" + 
+					"direccion.id_direccion, direccion.calle, direccion.altura, direccion.ciudad, direccion.codigo_postal,\r\n" + 
+					"provincia.id_provincia, provincia.nombre_provincia,\r\n" + 
+					"a.id_pais, a.nombre_pais\r\n" + 
+					"FROM cliente\r\n" + 
+					"JOIN pasaporte on cliente.id_cliente = pasaporte.id_cliente\r\n" + 
+					"JOIN pais on pasaporte.id_pais = pais.id_pais\r\n" + 
+					"JOIN telefono on cliente.id_cliente = telefono.id_cliente\r\n" + 
+					"JOIN pasajero_frecuente on cliente.id_cliente = pasajero_frecuente.id_cliente\r\n" + 
+					"JOIN aerolinea on pasajero_frecuente.id_aerolinea = aerolinea.id_aerolinea\r\n" + 
+					"JOIN direccion on cliente.id_cliente = direccion.id_cliente\r\n" + 
+					"JOIN provincia on direccion.id_provincia = provincia.id_provincia\r\n" + 
+					"JOIN pais a on direccion.id_provincia = a.id_pais\r\n" + 
+					"WHERE cliente.dni = ?");
 			
+			psCliente.setString(1, dni);
+			rsCliente = psCliente.executeQuery();
 			
-				psCliente.setString(1, dni);
-				rsCliente = psCliente.executeQuery(); 
-				Cliente cliente = new Cliente();
-				cliente.setId(rsCliente.getInt("id_cliente"));
-				cliente.setNombre(rsCliente.getString("nombre"));
-				cliente.setApellido(rsCliente.getString("apellido"));
-				cliente.setDni(rsCliente.getString("dni"));
-				cliente.setCuitCuil(rsCliente.getString("cuit_cuil"));
-				cliente.setFechaNacimiento(rsCliente.getDate("fecha_nacimiento"));
-				cliente.setEmail(rsCliente.getString("email"));
+			rsCliente.next();
+			
+			Cliente cliente = new Cliente();
+			cliente.setId(rsCliente.getInt("id_cliente"));
+			cliente.setNombre(rsCliente.getString("nombre"));
+			cliente.setApellido(rsCliente.getString("apellido"));
+			cliente.setDni(rsCliente.getString("dni"));
+			cliente.setCuitCuil(rsCliente.getString("cuit_cuil"));
+			cliente.setFechaNacimiento(new Date(rsCliente.getDate("fecha_nacimiento").getTime()));
+			cliente.setEmail(rsCliente.getString("email"));
 
-				
-				psPasaporte.setInt(1, rsCliente.getInt("id_cliente"));
-				rsPasaporte = psPasaporte.executeQuery(); 
-				Pasaporte pasaporte = new Pasaporte();
-				pasaporte.setId(rsPasaporte.getDouble("id_pasaporte"));
-				pasaporte.setNumero(rsPasaporte.getString("nro_pasaporte"));
-				pasaporte.setAutoridadEmision(rsPasaporte.getString("autoridad_emision"));
-				pasaporte.setFechaEmision(rsPasaporte.getDate("fecha_emision"));
-				pasaporte.setFechaVencimiento(rsPasaporte.getDate("fecha_vencimiento"));
-				
-				psPais.setInt(1, rsCliente.getInt("id_pais"));
-				rsPais = psPais.executeQuery(); 
-				Pais pais = new Pais();
-				pais.setId(rsPais.getDouble("id_pais"));
-				pais.setNombre(rsPais.getString("nombre_pais"));
-				pasaporte.setPais(pais); 
-				
-				cliente.setPasaporte(pasaporte); 
-				
-				psTelefono.setInt(1, rsCliente.getInt("id_cliente"));
-				rsTelefono = psTelefono.executeQuery(); 
-				Telefono telefono = new Telefono();
-				telefono.setId(rsTelefono.getDouble("id_telefono"));
-				telefono.setNumeroPersonal(rsTelefono.getString("personal"));
-				telefono.setNumeroCelular(rsTelefono.getString("celular"));
-				telefono.setNumeroLaboral(rsTelefono.getString("laboral"));
-				
-				psPasajeroFrecuente.setInt(1, rsCliente.getInt("id_cliente"));
-				rsPasajeroFrecuente = psPasajeroFrecuente.executeQuery(); 
-				PasajeroFrecuente pasajeroFrecuente = new PasajeroFrecuente();
-				pasajeroFrecuente.setId(rsPasajeroFrecuente.getDouble("id_pasajero_frecuente"));
-				pasajeroFrecuente.setNumero(rsPasajeroFrecuente.getString("numero"));
-				pasajeroFrecuente.setCategoria(rsPasajeroFrecuente.getString("categoria"));
-				
-				Alianza alianza = new Alianza();
-				alianza.setNombre(rsPasajeroFrecuente.getString("alianza"));
-				pasajeroFrecuente.setAlianza(alianza);
-				
-				psAerolinea.setInt(1, rsPasajeroFrecuente.getInt("id_aerolinea"));
-				rsAerolinea = psAerolinea.executeQuery();
-				Aerolinea aerolinea = new Aerolinea();
-				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
-				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza2 = new Alianza();
-				alianza2.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza2);
-				pasajeroFrecuente.setAerolinea(aerolinea);
-				
-				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
-				rsDireccion = psDireccion.executeQuery(); 
-				Direccion direccion = new Direccion();
-				direccion.setId(rsDireccion.getDouble("id_direccion"));
-				direccion.setCalle(rsDireccion.getString("calle"));
-				direccion.setAltura(rsDireccion.getString("altura"));
-				direccion.setCiudad(rsDireccion.getString("ciudad"));
-				direccion.setCodigoPostal(rsDireccion.getString("codigo_Postal"));
-				
-				psPais.setInt(1, rsDireccion.getInt("id_pais"));
-				rsPais = psPais.executeQuery(); 
-				Pais pais2 = new Pais();
-				pais2.setId(rsPais.getDouble("id_pais"));
-				pais2.setNombre(rsPais.getString("nombre_pais"));
-				direccion.setPais(pais2);
-				
-				psProvincia.setInt(1, rsDireccion.getInt("id_provincia"));
-				rsProvincia = psProvincia.executeQuery(); 
-				Provincia provincia = new Provincia();
-				provincia.setId(rsProvincia.getDouble("id_provincia"));
-				provincia.setNombre(rsProvincia.getString("nombre_provincia"));
-				direccion.setProvincia(provincia); 
-				
-				cliente.setDireccion(direccion);
-						
+			Pasaporte pasaporte = new Pasaporte();
+			pasaporte.setId(rsCliente.getInt("id_pasaporte"));
+			pasaporte.setNumero(rsCliente.getString("nro_pasaporte"));
+			pasaporte.setAutoridadEmision(rsCliente.getString("autoridad_emision"));
+			pasaporte.setFechaEmision(new Date(rsCliente.getDate("fecha_emision").getTime()));
+			pasaporte.setFechaVencimiento(new Date(rsCliente.getDate("fecha_vencimiento").getTime()));
+			Pais paisPasaporte = new Pais();
+			paisPasaporte.setId(rsCliente.getInt("id_pais"));
+			paisPasaporte.setNombre(rsCliente.getString("nombre_pais"));
+			pasaporte.setPais(paisPasaporte);
+			cliente.setPasaporte(pasaporte);
+			
+			Telefono telefono = new Telefono();
+			telefono.setId(rsCliente.getInt("id_telefono"));
+			telefono.setNumeroPersonal(rsCliente.getString("personal"));
+			telefono.setNumeroCelular(rsCliente.getString("celular"));
+			telefono.setNumeroLaboral(rsCliente.getString("laboral"));
+			cliente.setTelefono(telefono);
+			
+			PasajeroFrecuente pasajeroFrecuente = new PasajeroFrecuente();
+			pasajeroFrecuente.setId(rsCliente.getInt("id_pasajero_frecuente"));
+			pasajeroFrecuente.setAlianza(rsCliente.getString("alianza"));
+			pasajeroFrecuente.setNumero(rsCliente.getString("numero"));
+			pasajeroFrecuente.setCategoria(rsCliente.getString("categoria"));
+			Aerolinea aerolinea = new Aerolinea();
+			aerolinea.setId(rsCliente.getInt("id_aerolinea"));
+			aerolinea.setNombre(rsCliente.getString("nombre_aerolinea"));
+			aerolinea.setAlianza(rsCliente.getString("alianza"));
+			pasajeroFrecuente.setAerolinea(aerolinea);
+			cliente.setPasajeroFrecuente(pasajeroFrecuente);
+			
+			Direccion direccion = new Direccion();
+			direccion.setId(rsCliente.getInt("id_direccion"));
+			direccion.setCalle(rsCliente.getString("calle"));
+			direccion.setAltura(rsCliente.getString("altura"));
+			direccion.setCiudad(rsCliente.getString("ciudad"));
+			direccion.setCodigoPostal(rsCliente.getString("codigo_postal"));
+			Provincia provincia = new Provincia();
+			provincia.setId(rsCliente.getInt("id_provincia"));
+			provincia.setNombre(rsCliente.getString("nombre_provincia"));
+			direccion.setProvincia(provincia);
+			Pais PaisDireccion = new Pais();
+			PaisDireccion.setId(rsCliente.getInt("id_pais"));
+			PaisDireccion.setNombre(rsCliente.getString("nombre_pais"));
+			direccion.setPais(PaisDireccion);
+			cliente.setDireccion(direccion);
+		
 			return cliente;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -333,34 +236,6 @@ public class ClienteDAOImpl implements ClienteDAO{
 					psCliente.close();
 				}
 				
-				if (!psPasaporte.isClosed()) {
-					psPasaporte.close();
-				}
-				
-				if (!psTelefono.isClosed()) {
-					psTelefono.close();
-				}
-				
-				if (!psPasajeroFrecuente.isClosed()) {
-					psPasajeroFrecuente.close();
-				}
-				
-				if (!psDireccion.isClosed()) {
-					psDireccion.close();
-				}
-				
-				if (!psPais.isClosed()) {
-					psPais.close();
-				}
-				
-				if (!psAerolinea.isClosed()) {
-					psAerolinea.close();
-				}
-				
-				if (!psProvincia.isClosed()) {
-					psProvincia.close();
-				}
-				
 				if (!con.isClosed())
 					con.close();
 			} catch (SQLException e) {
@@ -372,21 +247,32 @@ public class ClienteDAOImpl implements ClienteDAO{
 	
 	
 	@Override
-	public void altaCliente(Cliente cliente) {
+	public double altaCliente(Cliente cliente) {
 		Connection con = null;
 		PreparedStatement psCliente = null;
+		PreparedStatement psCliente2 = null;
+		ResultSet rsCliente = null;
+		double idCliente = 0;
 		try{
-			con = getConnection();
+			con = Connect.getConnection();
 			psCliente=con.prepareStatement("INSERT INTO CLIENTE VALUES(NEXT VALUE FOR seq_cliente, ?, ?, ?, ?, ?, ?)");
 			
-			psCliente.setString(2, cliente.getNombre());
-			psCliente.setString(3, cliente.getApellido());
-			psCliente.setString(4, cliente.getDni());
-			psCliente.setString(5, cliente.getCuitCuil());
-			psCliente.setDate(6, cliente.getFechaNacimiento());
-			psCliente.setString(7, cliente.getEmail());
+			psCliente.setString(1, cliente.getNombre());
+			psCliente.setString(2, cliente.getApellido());
+			psCliente.setString(3, cliente.getDni());
+			psCliente.setString(4, cliente.getCuitCuil());
+			psCliente.setDate(5, new java.sql.Date(cliente.getFechaNacimiento().getTime()));
+			psCliente.setString(6, cliente.getEmail());
 			
 			psCliente.execute();
+			
+			psCliente2=con.prepareStatement("SELECT * FROM CLIENTE WHERE DNI = " + cliente.getDni());
+			rsCliente = psCliente2.executeQuery();
+			rsCliente.next();
+		
+			idCliente = rsCliente.getInt("id_cliente");
+			
+			
 					
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -397,6 +283,9 @@ public class ClienteDAOImpl implements ClienteDAO{
 				if(!psCliente.isClosed()){
 					psCliente.close();
 				}
+				if(!psCliente2.isClosed()){
+					psCliente2.close();
+				}
 				if(!con.isClosed()){
 					con.close();
 				}
@@ -404,6 +293,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 				e.printStackTrace();
 			}
 		}
+		return idCliente;
 		
 	}
 
@@ -412,16 +302,16 @@ public class ClienteDAOImpl implements ClienteDAO{
 		Connection con = null;
 		PreparedStatement psCliente = null;
 		try{
-			con = getConnection();
-			psCliente=con.prepareStatement("UPDATE CLIENTE SET nombre = ? , apellido = ? , dni = ? , cuit_cuil = ? , fecha_nacimiento = ? , email = ? WHERE dni = ?");
+			con = Connect.getConnection();
+			psCliente=con.prepareStatement("UPDATE CLIENTE SET nombre = ? , apellido = ? , dni = ? , cuit_cuil = ? , fecha_nacimiento = ? , email = ? WHERE id_cliente = ?");
 			
-			psCliente.setString(2, cliente.getNombre());
-			psCliente.setString(3, cliente.getApellido());
-			psCliente.setString(4, cliente.getDni());
-			psCliente.setString(5, cliente.getCuitCuil());
-			psCliente.setDate(6, cliente.getFechaNacimiento());
-			psCliente.setString(7, cliente.getEmail());
-			psCliente.setString(8, cliente.getDni());
+			psCliente.setString(1, cliente.getNombre());
+			psCliente.setString(2, cliente.getApellido());
+			psCliente.setString(3, cliente.getDni());
+			psCliente.setString(4, cliente.getCuitCuil());
+			psCliente.setDate(5, new java.sql.Date(cliente.getFechaNacimiento().getTime()));
+			psCliente.setString(6, cliente.getEmail());
+			psCliente.setDouble(7, cliente.getId());
 			
 			psCliente.execute();
 					
@@ -449,7 +339,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		Connection con = null;
 		PreparedStatement psCliente = null;
 		try{
-			con = getConnection();
+			con = Connect.getConnection();
 			psCliente=con.prepareStatement("DELETE FROM CLIENTE WHERE dni = ?");
 			
 			psCliente.setString(1, dni);

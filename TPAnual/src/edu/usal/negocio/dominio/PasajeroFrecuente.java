@@ -3,10 +3,10 @@ package edu.usal.negocio.dominio;
 public class PasajeroFrecuente {
 	
 	private double id;
-	private Alianza alianza;
-	private Aerolinea aerolinea;
+	private String alianza;
 	private String numero;
 	private String categoria;
+	private Aerolinea aerolinea;
 	
 	public double getId() {
 		return id;
@@ -14,10 +14,10 @@ public class PasajeroFrecuente {
 	public void setId(double id) {
 		this.id = id;
 	}	
-	public Alianza getAlianza() {
+	public String getAlianza() {
 		return alianza;
 	}
-	public void setAlianza(Alianza alianza) {
+	public void setAlianza(String alianza) {
 		this.alianza = alianza;
 	}
 	public Aerolinea getAerolinea() {
@@ -41,7 +41,7 @@ public class PasajeroFrecuente {
 	
 	
 	
-	public PasajeroFrecuente(double id, Alianza alianza, Aerolinea aerolinea, String numero, String categoria) {
+	public PasajeroFrecuente(double id, String alianza, Aerolinea aerolinea, String numero, String categoria) {
 		super();
 		this.id = id;
 		this.alianza = alianza;

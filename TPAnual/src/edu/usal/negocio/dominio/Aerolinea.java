@@ -6,7 +6,7 @@ public class Aerolinea {
 	 
 	private double id;
 	private String nombre;
-	private Alianza alianza;
+	private String alianza;
 	private List<Vuelos> vuelos;
 	
 	public double getId() {
@@ -21,10 +21,10 @@ public class Aerolinea {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Alianza getAlianza() {
+	public String getAlianza() {
 		return alianza;
 	}
-	public void setAlianza(Alianza alianza) {
+	public void setAlianza(String alianza) {
 		this.alianza = alianza;
 	}
 	public List<Vuelos> getVuelos() {
@@ -34,7 +34,7 @@ public class Aerolinea {
 		this.vuelos = vuelos;
 	}
 	
-	public Aerolinea(double id, String nombre, Alianza alianza, List<Vuelos> vuelos) {
+	public Aerolinea(double id, String nombre, String alianza, List<Vuelos> vuelos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;

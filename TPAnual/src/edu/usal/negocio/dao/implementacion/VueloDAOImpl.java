@@ -133,9 +133,8 @@ public class VueloDAOImpl implements VueloDAO{
 				Aerolinea aerolinea = new Aerolinea();
 				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza2 = new Alianza();
-				alianza2.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza2);
+
+
 				vuelo.setAerolinea(aerolinea);
 				vuelos.add(vuelo);
 			}
@@ -266,9 +265,8 @@ public class VueloDAOImpl implements VueloDAO{
 			Aerolinea aerolinea = new Aerolinea();
 			aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
 			aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-			Alianza alianza2 = new Alianza();
-			alianza2.setNombre(rsAerolinea.getString("alianza"));
-			aerolinea.setAlianza(alianza2);
+
+
 			vuelo.setAerolinea(aerolinea);
 			
 

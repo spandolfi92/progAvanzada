@@ -143,18 +143,13 @@ public class VentaDAOImpl implements VentaDAO{
 				pasajeroFrecuente.setNumero(rsPasajeroFrecuente.getString("numero"));
 				pasajeroFrecuente.setCategoria(rsPasajeroFrecuente.getString("categoria"));
 				
-				Alianza alianza = new Alianza();
-				alianza.setNombre(rsPasajeroFrecuente.getString("alianza"));
-				pasajeroFrecuente.setAlianza(alianza);
 				
 				psAerolinea.setInt(1, rsPasajeroFrecuente.getInt("id_aerolinea"));
 				rsAerolinea = psAerolinea.executeQuery();
 				Aerolinea aerolinea = new Aerolinea();
 				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza2 = new Alianza();
-				alianza2.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza2);
+				
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
 				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
@@ -251,9 +246,7 @@ public class VentaDAOImpl implements VentaDAO{
 				Aerolinea aerolinea1 = new Aerolinea();
 				aerolinea1.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea1.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza21 = new Alianza();
-				alianza21.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea1.setAlianza(alianza21);
+				
 				vuelo.setAerolinea(aerolinea1);
 				venta.setVuelo(vuelo);
 				
@@ -267,8 +260,7 @@ public class VentaDAOImpl implements VentaDAO{
 				aerolinea11.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea11.setNombre(rsAerolinea.getString("nombre_aerolinea"));
 				Alianza alianza211 = new Alianza();
-				alianza211.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea11.setAlianza(alianza211);
+				
 				venta.setAerolinea(aerolinea11);
 				
 				ventas.add(venta);
@@ -438,18 +430,14 @@ public class VentaDAOImpl implements VentaDAO{
 				pasajeroFrecuente.setNumero(rsPasajeroFrecuente.getString("numero"));
 				pasajeroFrecuente.setCategoria(rsPasajeroFrecuente.getString("categoria"));
 				
-				Alianza alianza = new Alianza();
-				alianza.setNombre(rsPasajeroFrecuente.getString("alianza"));
-				pasajeroFrecuente.setAlianza(alianza);
-				
+
+
 				psAerolinea.setInt(1, rsPasajeroFrecuente.getInt("id_aerolinea"));
 				rsAerolinea = psAerolinea.executeQuery();
 				Aerolinea aerolinea = new Aerolinea();
 				aerolinea.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza2 = new Alianza();
-				alianza2.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea.setAlianza(alianza2);
+				
 				pasajeroFrecuente.setAerolinea(aerolinea);
 				
 				psDireccion.setInt(1, rsCliente.getInt("id_cliente"));
@@ -546,9 +534,8 @@ public class VentaDAOImpl implements VentaDAO{
 				Aerolinea aerolinea1 = new Aerolinea();
 				aerolinea1.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea1.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza21 = new Alianza();
-				alianza21.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea1.setAlianza(alianza21);
+
+
 				vuelo.setAerolinea(aerolinea1);
 				venta.setVuelo(vuelo);
 				
@@ -561,9 +548,8 @@ public class VentaDAOImpl implements VentaDAO{
 				Aerolinea aerolinea11 = new Aerolinea();
 				aerolinea11.setId(rsAerolinea.getInt("id_aerolinea"));
 				aerolinea11.setNombre(rsAerolinea.getString("nombre_aerolinea"));
-				Alianza alianza211 = new Alianza();
-				alianza211.setNombre(rsAerolinea.getString("alianza"));
-				aerolinea11.setAlianza(alianza211);
+
+
 				venta.setAerolinea(aerolinea11);
 				
 						
