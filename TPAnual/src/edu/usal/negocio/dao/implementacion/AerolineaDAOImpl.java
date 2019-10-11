@@ -11,7 +11,6 @@ import java.util.List;
 
 import edu.usal.negocio.dao.interfaces.AerolineaDAO;
 import edu.usal.negocio.dominio.Aerolinea;
-import edu.usal.negocio.dominio.Alianza;
 
 public class AerolineaDAOImpl implements AerolineaDAO{
 

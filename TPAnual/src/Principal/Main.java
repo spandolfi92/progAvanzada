@@ -121,13 +121,9 @@ public class Main {
 			
 			
 			
-			con.commit();
+			Connect.commit();
 		} catch(SQLException e) {
-			try {
-				con.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			Connect.rollback();
 		}
 
 	}

@@ -1,7 +1,6 @@
 package edu.usal.negocio.dao.implementacion;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import edu.usal.negocio.dao.interfaces.ClienteDAO;
 import edu.usal.negocio.dominio.Aerolinea;
-import edu.usal.negocio.dominio.Alianza;
 import edu.usal.negocio.dominio.Cliente;
 import edu.usal.negocio.dominio.Direccion;
 import edu.usal.negocio.dominio.Pais;
@@ -20,7 +18,6 @@ import edu.usal.negocio.dominio.PasajeroFrecuente;
 import edu.usal.negocio.dominio.Pasaporte;
 import edu.usal.negocio.dominio.Provincia;
 import edu.usal.negocio.dominio.Telefono;
-import edu.usal.util.PropertiesUtil;
 
 public class ClienteDAOImpl implements ClienteDAO{
 	

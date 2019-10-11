@@ -2,7 +2,6 @@ package edu.usal.negocio.dao.implementacion;
 
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import edu.usal.negocio.dao.interfaces.ProvinciaDAO;
 import edu.usal.negocio.dominio.Provincia;
-import edu.usal.util.PropertiesUtil;
 
 public class ProvinciaDAOImpl implements ProvinciaDAO{
 

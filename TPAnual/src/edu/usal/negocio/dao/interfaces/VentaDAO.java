@@ -7,9 +7,9 @@ import edu.usal.negocio.dominio.Ventas;
 public interface VentaDAO {
 	
 	public List <Ventas> listarVentas();
-	public Ventas obtenerVenta(String codigoVenta);
+	public Ventas obtenerVenta(double id);
 	public void altaVenta (Ventas venta);
 	public void modificarVenta (Ventas venta);
-	public void eliminarVenta (String codigoVenta);
+	public void eliminarVenta (double id);
 
 }
