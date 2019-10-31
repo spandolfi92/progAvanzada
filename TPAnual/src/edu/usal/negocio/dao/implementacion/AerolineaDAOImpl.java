@@ -138,7 +138,7 @@ public class AerolineaDAOImpl implements AerolineaDAO{
 		PreparedStatement psAerolinea = null;
 		try{
 			con = Connect.getConnection();
-			psAerolinea=con.prepareStatement("UPDATE Aerolinea SET nombre = ? , alianza = ? WHERE id_aerolinea = ?");
+			psAerolinea=con.prepareStatement("UPDATE Aerolinea SET nombre_aerolinea = ? , alianza = ? WHERE id_aerolinea = ?");
 			
 			psAerolinea.setString(1, aerolinea.getNombre());
 			psAerolinea.setString(2, aerolinea.getAlianza());

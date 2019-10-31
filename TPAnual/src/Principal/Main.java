@@ -6,12 +6,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import edu.usal.negocio.dao.factory.AerolineaFactory;
+import edu.usal.negocio.dao.factory.AlianzaFactory;
 import edu.usal.negocio.dao.factory.ClienteFactory;
 import edu.usal.negocio.dao.factory.DireccionFactory;
 import edu.usal.negocio.dao.factory.PasajeroFrecuenteFactory;
 import edu.usal.negocio.dao.factory.PasaporteFactory;
 import edu.usal.negocio.dao.factory.TelefonoFactory;
 import edu.usal.negocio.dao.implementacion.Connect;
+import edu.usal.negocio.dao.interfaces.AerolineaDAO;
+import edu.usal.negocio.dao.interfaces.AlianzaDAO;
 import edu.usal.negocio.dao.interfaces.ClienteDAO;
 import edu.usal.negocio.dao.interfaces.DireccionDAO;
 import edu.usal.negocio.dao.interfaces.PasajeroFrecuenteDAO;
@@ -28,9 +32,22 @@ import edu.usal.negocio.dominio.Telefono;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException{
 
-		ClienteDAO clienteDAO = ClienteFactory.getImplementation("BD");
+		AerolineaDAO aerolineaDAO = AerolineaFactory.getImplementation("BD");
+
+			
+			
+		
+			Aerolinea aerolinea = new Aerolinea();
+			aerolinea.setAlianza("Oneworld");
+			aerolinea.setNombre("Prueba");
+			
+			aerolineaDAO.altaAerolinea(aerolinea);
+			
+		
+		
+		/*ClienteDAO clienteDAO = ClienteFactory.getImplementation("BD");
 		PasaporteDAO pasaporteDAO = PasaporteFactory.getImplementation("BD");
 		TelefonoDAO telefonoDAO = TelefonoFactory.getImplementation("BD");
 		PasajeroFrecuenteDAO pasajeroFrecuenteDAO = PasajeroFrecuenteFactory.getImplementation("BD");
@@ -124,7 +141,7 @@ public class Main {
 			Connect.commit();
 		} catch(SQLException e) {
 			Connect.rollback();
-		}
+		}*/
 
 	}
 

@@ -9,6 +9,6 @@ public interface ClienteDAO {
 	public Cliente obtenerCliente(String dni);
 	public double altaCliente (Cliente cliente);
 	public void modificarCliente (Cliente cliente);
-	public void eliminarCliente (String dni);
+	public void eliminarCliente (double idCliente);
 
 }

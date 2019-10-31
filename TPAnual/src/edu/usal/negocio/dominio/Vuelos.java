@@ -54,9 +54,26 @@ public class Vuelos {
 	public Date getFechaLlegada() {
 		return fechaLlegada;
 	}
+	public void setFechaLlegada(Date fechaLlegada) {
+		this.fechaLlegada = fechaLlegada;
+	}
+	public String getTiempoVuelo() {
+		return tiempoVuelo;
+	}
+	public void setTiempoVuelo(String tiempoVuelo) {
+		this.tiempoVuelo = tiempoVuelo;
+	}
+	public Aerolinea getAerolinea() {
+		return aerolinea;
+	}
+	public void setAerolinea(Aerolinea aerolinea) {
+		this.aerolinea = aerolinea;
+	}
+	
 	public Vuelos(double id, String numeroVuelo, Integer cantidadAsientos, Aeropuerto aeropuertoSalida,
-			Aeropuerto aeropuertoLlegada, Date fechaSalida, Date fechaLlegada, String tiempoVuelo, Aerolinea aerolinea) {
-		super();
+			Aeropuerto aeropuertoLlegada, Date fechaSalida, Date fechaLlegada, String tiempoVuelo,
+			Aerolinea aerolinea) {
+		
 		this.id = id;
 		this.numeroVuelo = numeroVuelo;
 		this.cantidadAsientos = cantidadAsientos;
@@ -67,26 +84,9 @@ public class Vuelos {
 		this.tiempoVuelo = tiempoVuelo;
 		this.aerolinea = aerolinea;
 	}
-	public void setFechaLlegada(Date fechaLlegada) {
-		this.fechaLlegada = fechaLlegada;
-	}
-	public String getTiempoVuelo() {
-		return tiempoVuelo;
-	}
-	public void setTiempoVuelo(String tiempoVuelo) {
-		this.tiempoVuelo = tiempoVuelo;
-	}
-
 	
 	public Vuelos() {
-	}
-	public Aerolinea getAerolinea() {
-		return aerolinea;
-	}
-	public void setAerolinea(Aerolinea aerolinea) {
-		this.aerolinea = aerolinea;
+		
 	}
 	
-	
-
 }

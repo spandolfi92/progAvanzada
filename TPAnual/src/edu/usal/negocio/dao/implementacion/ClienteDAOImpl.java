@@ -332,14 +332,14 @@ public class ClienteDAOImpl implements ClienteDAO{
 	}
 
 	@Override
-	public void eliminarCliente(String dni) {
+	public void eliminarCliente(double idCliente) {
 		Connection con = null;
 		PreparedStatement psCliente = null;
 		try{
 			con = Connect.getConnection();
-			psCliente=con.prepareStatement("DELETE FROM CLIENTE WHERE dni = ?");
+			psCliente=con.prepareStatement("DELETE FROM CLIENTE WHERE id_cliente = ?");
 			
-			psCliente.setString(1, dni);
+			psCliente.setDouble(1, idCliente);
 			
 			psCliente.execute();
 
