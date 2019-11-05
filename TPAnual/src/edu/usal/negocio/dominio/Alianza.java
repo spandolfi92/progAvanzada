@@ -3,9 +3,19 @@ package edu.usal.negocio.dominio;
 
 public class Alianza{
 
+	private int id;
 	private String nombre;
 	
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -15,8 +25,9 @@ public class Alianza{
 	}
 
 	
-
-	public Alianza(String nombre) {
+	public Alianza(int id, String nombre) {
+		
+		this.id = id;
 		this.nombre = nombre;
 	}
 

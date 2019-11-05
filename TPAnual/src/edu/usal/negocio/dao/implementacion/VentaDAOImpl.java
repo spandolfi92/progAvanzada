@@ -28,9 +28,9 @@ public class VentaDAOImpl implements VentaDAO{
 			stm = con.createStatement();
 			
 			rsVentas = stm.executeQuery("select ventas.id_venta, ventas.fecha_hs_venta, ventas.forma_pago,\r\n" + 
-					"cliente.nombre, cliente.apellido, cliente.dni,\r\n" + 
-					"vuelos.nro_vuelo, vuelos.fecha_hs_salida, vuelos.fecha_hs_llegada,\r\n" + 
-					"aerolinea.nombre_aerolinea\r\n" + 
+					"cliente.nombre, cliente.id_cliente, cliente.apellido, cliente.dni,\r\n" + 
+					"vuelos.nro_vuelo, vuelos.id_vuelo, vuelos.fecha_hs_salida, vuelos.fecha_hs_llegada,\r\n" + 
+					"aerolinea.nombre_aerolinea, aerolinea.id_aerolinea \r\n" + 
 					"from ventas\r\n" + 
 					"join cliente on ventas.id_cliente = cliente.id_cliente\r\n" + 
 					"join vuelos on ventas.id_vuelo = vuelos.id_vuelo\r\n" + 
@@ -49,16 +49,19 @@ public class VentaDAOImpl implements VentaDAO{
 				cliente.setNombre(rsVentas.getString("nombre"));
 				cliente.setApellido(rsVentas.getString("apellido"));
 				cliente.setDni(rsVentas.getString("dni"));
+				cliente.setId(rsVentas.getInt("id_cliente"));
 				venta.setCliente(cliente);
 				
 				Vuelos vuelo = new Vuelos();
 				vuelo.setNumeroVuelo(rsVentas.getString("nro_vuelo"));
 				vuelo.setFechaLlegada(rsVentas.getDate("fecha_hs_llegada"));
 				vuelo.setFechaSalida(rsVentas.getDate("fecha_hs_salida"));
+				vuelo.setId(rsVentas.getInt("id_vuelo"));
 				venta.setVuelo(vuelo);
 			
 				Aerolinea aerolinea = new Aerolinea();
 				aerolinea.setNombre(rsVentas.getString("nombre_aerolinea"));
+				aerolinea.setId(rsVentas.getInt("id_aerolinea"));
 				venta.setAerolinea(aerolinea);
 				
 				ventas.add(venta);

@@ -33,13 +33,13 @@ public class ClienteDAOImpl implements ClienteDAO{
 			stm = con.createStatement();
 			rsCliente = stm.executeQuery("SELECT cliente.id_cliente, cliente.nombre, cliente.apellido, cliente.dni, cliente.cuit_cuil, cliente.fecha_nacimiento, cliente.email,\r\n" + 
 					"pasaporte.id_pasaporte, pasaporte.nro_pasaporte, pasaporte.autoridad_emision, pasaporte.fecha_emision, pasaporte.fecha_vencimiento,\r\n" + 
-					"pais.id_pais, pais.nombre_pais,\r\n" + 
+					"pais.id_pais as pais1, pais.nombre_pais,\r\n" + 
 					"telefono.id_telefono, telefono.personal, telefono.celular, telefono.laboral,\r\n" + 
 					"pasajero_frecuente.id_pasajero_frecuente, pasajero_frecuente.alianza, pasajero_frecuente.numero, pasajero_frecuente.categoria,\r\n" + 
 					"aerolinea.id_aerolinea, aerolinea.nombre_aerolinea, aerolinea.alianza,\r\n" + 
 					"direccion.id_direccion, direccion.calle, direccion.altura, direccion.ciudad, direccion.codigo_postal,\r\n" + 
 					"provincia.id_provincia, provincia.nombre_provincia,\r\n" + 
-					"a.id_pais, a.nombre_pais\r\n" + 
+					"a.id_pais as pais2, a.nombre_pais\r\n" + 
 					"FROM cliente\r\n" + 
 					"JOIN pasaporte on cliente.id_cliente = pasaporte.id_cliente\r\n" + 
 					"JOIN pais on pasaporte.id_pais = pais.id_pais\r\n" + 
@@ -48,7 +48,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 					"JOIN aerolinea on pasajero_frecuente.id_aerolinea = aerolinea.id_aerolinea\r\n" + 
 					"JOIN direccion on cliente.id_cliente = direccion.id_cliente\r\n" + 
 					"JOIN provincia on direccion.id_provincia = provincia.id_provincia\r\n" + 
-					"JOIN pais a on direccion.id_provincia = a.id_pais");
+					"JOIN pais a on direccion.id_pais = a.id_pais");
 			
 			List<Cliente> clientes = new ArrayList<Cliente>();
 
@@ -69,7 +69,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 				pasaporte.setFechaEmision(new Date(rsCliente.getDate("fecha_emision").getTime()));
 				pasaporte.setFechaVencimiento(new Date(rsCliente.getDate("fecha_vencimiento").getTime()));
 				Pais paisPasaporte = new Pais();
-				paisPasaporte.setId(rsCliente.getInt("id_pais"));
+				paisPasaporte.setId(rsCliente.getInt("pais1"));
 				paisPasaporte.setNombre(rsCliente.getString("nombre_pais"));
 				pasaporte.setPais(paisPasaporte);
 				cliente.setPasaporte(pasaporte);
@@ -104,7 +104,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 				provincia.setNombre(rsCliente.getString("nombre_provincia"));
 				direccion.setProvincia(provincia);
 				Pais PaisDireccion = new Pais();
-				PaisDireccion.setId(rsCliente.getInt("id_pais"));
+				PaisDireccion.setId(rsCliente.getInt("pais2"));
 				PaisDireccion.setNombre(rsCliente.getString("nombre_pais"));
 				direccion.setPais(PaisDireccion);
 				cliente.setDireccion(direccion);
@@ -156,7 +156,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 					"JOIN aerolinea on pasajero_frecuente.id_aerolinea = aerolinea.id_aerolinea\r\n" + 
 					"JOIN direccion on cliente.id_cliente = direccion.id_cliente\r\n" + 
 					"JOIN provincia on direccion.id_provincia = provincia.id_provincia\r\n" + 
-					"JOIN pais a on direccion.id_provincia = a.id_pais\r\n" + 
+					"JOIN pais a on direccion.id_pais = a.id_pais\r\n" + 
 					"WHERE cliente.dni = ?");
 			
 			psCliente.setString(1, dni);

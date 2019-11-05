@@ -26,7 +26,7 @@ public class VueloDAOImpl implements VueloDAO{
 			con = Connect.getConnection();
 			stm = con.createStatement();
 			rsVuelos = stm.executeQuery("select vuelos.id_vuelo, vuelos.nro_vuelo, vuelos.cant_asientos, vuelos.fecha_hs_salida, vuelos.fecha_hs_llegada, vuelos.tiempo_vuelo,\r\n" + 
-					"ae1.codigo_aeropuerto, ae1.id_aeropuerto, ae2.codigo_aeropuerto, ae2.id_aeropuerto,  aerolinea.nombre_aerolinea, aerolinea.id_aerolinea \r\n" + 
+					"ae1.codigo_aeropuerto as ae1codigo_aeropuerto, ae1.id_aeropuerto as ae1id_aeropuerto, ae2.codigo_aeropuerto as ae2codigo_aeropuerto, ae2.id_aeropuerto as ae2id_aeropuerto,  aerolinea.nombre_aerolinea, aerolinea.id_aerolinea \r\n" + 
 					"from vuelos\r\n" + 
 					"join AEROPUERTO as ae1 on vuelos.id_aeropuerto_salida = ae1.id_aeropuerto \r\n" + 
 					"join AEROPUERTO as ae2 on vuelos.id_aeropuerto_llegada = ae2.id_aeropuerto \r\n" + 
@@ -46,13 +46,13 @@ public class VueloDAOImpl implements VueloDAO{
 				vuelo.setTiempoVuelo(rsVuelos.getString("tiempo_vuelo"));
 				
 				Aeropuerto aeropuertoSalida = new Aeropuerto();
-				aeropuertoSalida.setIdentificacion(rsVuelos.getString("codigo_aeropuerto"));
-				aeropuertoSalida.setId(rsVuelos.getInt("id_aeropuerto"));
+				aeropuertoSalida.setIdentificacion(rsVuelos.getString("ae1codigo_aeropuerto"));
+				aeropuertoSalida.setId(rsVuelos.getInt("ae1id_aeropuerto"));
 				vuelo.setAeropuertoSalida(aeropuertoSalida);
 				
 				Aeropuerto aeropuertoLlegada = new Aeropuerto();
-				aeropuertoLlegada.setIdentificacion(rsVuelos.getString("codigo_aeropuerto"));
-				aeropuertoLlegada.setId(rsVuelos.getInt("id_aeropuerto"));
+				aeropuertoLlegada.setIdentificacion(rsVuelos.getString("ae2codigo_aeropuerto"));
+				aeropuertoLlegada.setId(rsVuelos.getInt("ae2id_aeropuerto"));
 				vuelo.setAeropuertoLlegada(aeropuertoLlegada);
 		
 				Aerolinea aerolinea = new Aerolinea();

@@ -93,5 +93,53 @@ public class PaisDAOImpl implements PaisDAO{
 			}
 		}	
 	}
+
+
+	@Override
+	public Pais altaPais(String nombre) {
+		Connection con = null;
+		PreparedStatement psPais = null;
+		PreparedStatement psPais2 = null;
+		ResultSet rsPais = null;
+		Pais p = new Pais();
+		
+		try{
+			con = Connect.getConnection();
+			psPais=con.prepareStatement("INSERT INTO PAIS VALUES(NEXT VALUE FOR seq_pais, ?)");
+			
+			psPais.setString(1, nombre);
+						
+			psPais.execute();
+			
+			psPais2=con.prepareStatement("SELECT * FROM PAIS WHERE nombre_pais = " + "'" + nombre + "'");
+			rsPais = psPais2.executeQuery();
+			rsPais.next();
+			
+			
+			p.setId(rsPais.getInt("id_pais"));
+			p.setNombre(nombre);
+			
+					
+		}catch(SQLException e){
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(!psPais.isClosed()){
+					psPais.close();
+				}
+				if(!psPais2.isClosed()){
+					psPais2.close();
+				}
+				if(!con.isClosed()){
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return p;
+	}
 		
 }

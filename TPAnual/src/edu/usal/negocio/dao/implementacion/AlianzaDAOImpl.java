@@ -33,8 +33,10 @@ public class AlianzaDAOImpl implements AlianzaDAO{
 	}
 	
 	private Alianza ParseAlianza(String linea) {
+		String[] atributos = linea.split(";");
 		Alianza alianza = new Alianza();
-		alianza.setNombre(linea);
+		alianza.setId(Integer.parseInt(atributos[0]));
+		alianza.setNombre(atributos[1]);
 		
 		return alianza;
 	}

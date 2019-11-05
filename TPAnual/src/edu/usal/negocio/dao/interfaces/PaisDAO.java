@@ -7,4 +7,5 @@ public interface PaisDAO {
 	
 	public List <Pais> listarPaises();
 	public Pais obtenerPais(String nombre);
+	public Pais altaPais(String nombre);
 }
